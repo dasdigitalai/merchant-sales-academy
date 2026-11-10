@@ -1,5 +1,5 @@
 import {
-  addDoc, collection, deleteDoc, doc, getDoc, getDocs, increment, orderBy, query, serverTimestamp, setDoc, Timestamp,
+  addDoc, collection, deleteDoc, doc, writeBatch, getDoc, getDocs, increment, orderBy, query, serverTimestamp, setDoc, Timestamp,
 } from "firebase/firestore";
 import { db } from "./firebase";
 
@@ -64,6 +64,23 @@ export async function createInvite(email: string, role: Role, invitedBy: Profile
 
 export async function deleteInvite(email: string) {
   await deleteDoc(doc(db, "invites", normalizeEmail(email)));
+}
+
+// Removes someone from the program: all their training data, their invite and
+// their profile. Rules only allow this for a manager who re-entered their
+// password in the last 5 minutes. Their sign-in account itself stays in
+// Firebase Authentication, but without a profile or invite it has no access.
+export async function removeUser(p: Profile) {
+  const subs = ["progress", "moduleTime", "days", "journal", "quizResults"];
+  const snaps = await Promise.all(subs.map((name) => getDocs(collection(db, "users", p.uid, name))));
+  const refs = snaps.flatMap((s) => s.docs.map((d) => d.ref));
+  for (let i = 0; i < refs.length; i += 450) {
+    const batch = writeBatch(db);
+    refs.slice(i, i + 450).forEach((r) => batch.delete(r));
+    await batch.commit();
+  }
+  await deleteDoc(doc(db, "invites", normalizeEmail(p.email)));
+  await deleteDoc(doc(db, "users", p.uid));
 }
 
 export async function markComplete(uid: string, moduleSlug: string, itemId: string) {

@@ -6,6 +6,8 @@ rules_version = '2';
 // - Reps read and write only their own data. Managers can read everyone's
 //   (including journal entries) and manage invites. Nobody can change a role
 //   from the app; change it in the Firebase console if ever needed.
+// - Managers can remove someone (profile and all their training data), but only
+//   within 5 minutes of re-entering their password, and never themselves.
 service cloud.firestore {
   match /databases/{database}/documents {
     function signedIn() { return request.auth != null; }
@@ -16,6 +18,12 @@ service cloud.firestore {
         && exists(/databases/$(database)/documents/users/$(request.auth.uid))
         && get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == "manager";
     }
+    // The manager re-entered their password in the last 5 minutes (the app
+    // reauthenticates before a removal, which refreshes auth_time).
+    function recentlyAuthed() {
+      return request.time < timestamp.value(request.auth.token.auth_time * 1000) + duration.value(5, 'm');
+    }
+    function canRemove(uid) { return isManager() && recentlyAuthed() && request.auth.uid != uid; }
     function invitePath() { return /databases/$(database)/documents/invites/$(authEmail()); }
 
     match /invites/{email} {
@@ -63,13 +71,14 @@ service cloud.firestore {
       // Reps can fix their name, nothing else.
       allow update: if isSelf(uid)
         && request.resource.data.diff(resource.data).affectedKeys().hasOnly(["firstName", "lastName"]);
-      allow delete: if false;
+      allow delete: if canRemove(uid);
 
       match /{sub}/{docId} {
         allow read: if isSelf(uid) || isManager();
         allow write: if isSelf(uid)
           && sub in ["progress", "moduleTime", "days", "journal", "quizResults"]
           && exists(/databases/$(database)/documents/users/$(uid));
+        allow delete: if canRemove(uid);
       }
     }
   }
