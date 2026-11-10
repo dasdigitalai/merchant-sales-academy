@@ -13,6 +13,7 @@ export type Brand = {
   tagline: string;
   description: string;
   icon?: string;           // favicon in /public
+  hero: { src: string; alt: string; width: number; height: number };  // home page image, in /public
   // CSS theme. Names are historical: "green" is the main brand color, "lime"
   // the bright accent, "orange" the second accent.
   colors: { ink: string; muted: string; cream: string; paper: string; green: string; greenDark: string; lime: string; orange: string; line: string };
@@ -28,6 +29,7 @@ const BRANDS: Record<BrandId, Brand> = {
     logoBottom: "ACADEMY",
     tagline: "Make the Call",
     description: "Cold-calling training built for merchant-services sales professionals.",
+    hero: { src: "/hero-call.png", alt: "Sales rep mid cold-call, wearing a headset", width: 1254, height: 1254 },
     colors: { ink: "#0a0b0a", muted: "#626760", cream: "#ecece4", paper: "#f6f6ef", green: "#167e3b", greenDark: "#06391c", lime: "#c3dd63", orange: "#ff5c35", line: "#c9cbc1" },
     pdf: { green: [22, 126, 59], lime: [195, 221, 99], ink: [10, 11, 10], muted: [98, 103, 96], line: [201, 203, 193], tint: [242, 246, 231] },
   },
@@ -40,6 +42,7 @@ const BRANDS: Record<BrandId, Brand> = {
     tagline: "Make the Call",
     description: "Cold-calling training for the Kadima Payments sales team.",
     icon: "/brands/kadima-icon.svg",
+    hero: { src: "/brands/kadima-hero.svg", alt: "A live call in progress: a voice waveform, the call timer and an objection card", width: 1254, height: 1254 },
     colors: { ink: "#0b0c0e", muted: "#5d646b", cream: "#e8edee", paper: "#f4f7f7", green: "#17804f", greenDark: "#08321f", lime: "#31be72", orange: "#27a9e2", line: "#cad3d4" },
     pdf: { green: [23, 128, 79], lime: [49, 190, 114], ink: [11, 12, 14], muted: [93, 100, 107], line: [202, 211, 212], tint: [232, 245, 238] },
   },
