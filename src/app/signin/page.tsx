@@ -1,4 +1,5 @@
 "use client";
+import { BRAND } from "@/lib/brand";
 import { sendPasswordResetEmail, signInWithEmailAndPassword } from "firebase/auth";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -46,7 +47,7 @@ export default function SignIn() {
   }
 
   return <div className="auth-split" style={{ minHeight: "100vh", display: "grid", gridTemplateColumns: "1fr 1fr" }}>
-    <section style={{ padding: 50, background: "var(--ink)", color: "white", display: "flex", flexDirection: "column" }}><Logo light /><div style={{ margin: "auto 8%" }}><div className="eyebrow" style={{ color: "var(--lime)" }}>Welcome back</div><h1 className="display" style={{ fontSize: 48, margin: "20px 0" }}>Your next call starts here.</h1><p style={{ color: "#b8c7c3", fontSize: 18, lineHeight: 1.6 }}>Keep building the confidence and consistency that turns dials into conversations.</p></div><small style={{ color: "#78908a" }}>Merchant Sales Academy</small></section>
+    <section style={{ padding: 50, background: "var(--ink)", color: "white", display: "flex", flexDirection: "column" }}><Logo light /><div style={{ margin: "auto 8%" }}><div className="eyebrow" style={{ color: "var(--lime)" }}>Welcome back</div><h1 className="display" style={{ fontSize: 48, margin: "20px 0" }}>Your next call starts here.</h1><p style={{ color: "#b8c7c3", fontSize: 18, lineHeight: 1.6 }}>Keep building the confidence and consistency that turns dials into conversations.</p></div><small style={{ color: "#78908a" }}>{BRAND.name}</small></section>
     <section style={{ display: "grid", placeItems: "center", padding: 30 }}>
       <form className="card" onSubmit={submit} style={{ width: "min(440px,100%)", padding: 38 }}>
         <h2 style={{ fontFamily: "Georgia,serif", fontSize: 34, margin: "0 0 8px" }}>Sign in</h2>

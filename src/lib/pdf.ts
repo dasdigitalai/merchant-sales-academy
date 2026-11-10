@@ -1,4 +1,5 @@
 import type { jsPDF as JsPDF } from "jspdf";
+import { BRAND } from "@/lib/brand";
 
 // Builds the downloadable PDFs (reflection summary, knowledge-check results, call plan, opener, pitch card, discovery plan, objection playbook, booking plan, follow-up plan, consistency plan, front-desk plan, call lab, final scenario, action plan, certificate) as real PDF files (Letter,
 // portrait; the certificate is landscape) instead of relying on the browser's print dialog, whose margin,
@@ -16,12 +17,12 @@ export type ReflectionPdfInput = {
   date: Date;
 };
 
-const GREEN: [number, number, number] = [22, 126, 59];
-const LIME: [number, number, number] = [195, 221, 99];
-const INK: [number, number, number] = [10, 11, 10];
-const MUTED: [number, number, number] = [98, 103, 96];
-const LINE: [number, number, number] = [201, 203, 193];
-const TINT: [number, number, number] = [242, 246, 231];
+const GREEN: [number, number, number] = BRAND.pdf.green;
+const LIME: [number, number, number] = BRAND.pdf.lime;
+const INK: [number, number, number] = BRAND.pdf.ink;
+const MUTED: [number, number, number] = BRAND.pdf.muted;
+const LINE: [number, number, number] = BRAND.pdf.line;
+const TINT: [number, number, number] = BRAND.pdf.tint;
 const PILL: Record<ReflectionPdfInput["verdict"], { bg: [number, number, number]; fg: [number, number, number] }> = {
   strong: { bg: GREEN, fg: [255, 255, 255] },
   close: { bg: LIME, fg: INK },
@@ -130,7 +131,7 @@ function drawHeader(doc: JsPDF, kicker: string, title: string, dateText: string)
   doc.setFont("times", "normal").setFontSize(24).setTextColor(255, 255, 255);
   doc.text(title, MARGIN, 76);
   doc.setFont("helvetica", "normal").setFontSize(10).setTextColor(201, 219, 213);
-  doc.text(`Merchant Sales Academy  |  ${dateText}`, MARGIN, 98);
+  doc.text(`${BRAND.name}  |  ${dateText}`, MARGIN, 98);
 }
 
 // Copyright footer at the same position on every page.
@@ -141,7 +142,7 @@ function drawFooters(doc: JsPDF, date: Date) {
     doc.setPage(i);
     doc.setDrawColor(...LINE).setLineWidth(0.75).line(MARGIN, pageH - 42, pageW - MARGIN, pageH - 42);
     doc.setFont("helvetica", "normal").setFontSize(8.5).setTextColor(...MUTED);
-    doc.text(`© ${date.getFullYear()} Merchant Sales Academy. All rights reserved.`, pageW / 2, pageH - 26, { align: "center" });
+    doc.text(`© ${date.getFullYear()} ${BRAND.name}. All rights reserved.`, pageW / 2, pageH - 26, { align: "center" });
   }
 }
 
@@ -1179,16 +1180,16 @@ export async function downloadCertificatePdf(input: CertificatePdfInput) {
   doc.setDrawColor(...LIME).setLineWidth(3).rect(40, 40, w - 80, h - 80, "S");
 
   doc.setFont("helvetica", "bold").setFontSize(10).setTextColor(...GREEN);
-  doc.text("MERCHANT SALES ACADEMY", cx, 108, { align: "center", charSpace: 2 });
+  doc.text(BRAND.name.toUpperCase(), cx, 108, { align: "center", charSpace: 2 });
   doc.setFont("times", "normal").setFontSize(38).setTextColor(...INK);
   doc.text("Appointment-Setter Certification", cx, 168, { align: "center" });
   doc.setFont("helvetica", "normal").setFontSize(12).setTextColor(...MUTED);
   doc.text("This certifies that", cx, 222, { align: "center" });
   doc.setFont("times", "italic").setFontSize(34).setTextColor(...GREEN);
-  doc.text(clean(input.name) || "Merchant Sales Academy graduate", cx, 272, { align: "center" });
+  doc.text(clean(input.name) || `${BRAND.name} graduate`, cx, 272, { align: "center" });
   doc.setDrawColor(...LINE).setLineWidth(0.75).line(cx - 200, 288, cx + 200, 288);
   doc.setFont("helvetica", "normal").setFontSize(12).setTextColor(...INK);
-  const body = doc.splitTextToSize("has completed all twelve modules of the Merchant Sales Academy cold-calling program, passed the final scenario call and the final exam, and committed to a 30-day action plan.", 480) as string[];
+  const body = doc.splitTextToSize(`has completed all twelve modules of the ${BRAND.name} cold-calling program, passed the final scenario call and the final exam, and committed to a 30-day action plan.`, 480) as string[];
   doc.text(body, cx, 320, { align: "center", lineHeightFactor: 1.5 });
 
   doc.setFont("helvetica", "bold").setFontSize(8.5).setTextColor(...MUTED);

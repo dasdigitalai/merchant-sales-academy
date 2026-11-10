@@ -3,6 +3,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { runCoach } from "@/lib/coach";
 import { guardPaidRoute } from "@/lib/apiGuard";
 import { scenarios } from "@/data/scenarios";
+import { BRAND } from "@/lib/brand";
 
 // Grading for Module 12's "Final Scenario Call", the certification call: for
 // one of the merchants in data/scenarios.ts, the rep writes the whole call in
@@ -11,7 +12,7 @@ import { scenarios } from "@/data/scenarios";
 
 const MAX_FIELD_CHARS = 1500;
 
-const SYSTEM = `You are a sales coach grading the certification call inside Merchant Sales Academy, a cold-calling training program for merchant-services reps (payment processing, POS systems, card terminals).
+const SYSTEM = `You are a sales coach grading the certification call inside ${BRAND.name}, a cold-calling training program for merchant-services reps (payment processing, POS systems, card terminals).
 
 The rep is doing the "Final Scenario Call" in Module 12, "Appointment-Setter Certification." They were given a merchant profile (below, in <scenario>) and wrote the whole call in six parts. Passing requires every part to follow what the course teaches, so grade each part fairly: mark "good" when it does what the course asks, even if a sentence could be polished, and "fix" when something the course teaches is missing or wrong. Grade against the scenario's facts.
 

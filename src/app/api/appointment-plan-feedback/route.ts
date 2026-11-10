@@ -2,6 +2,7 @@ import { betaJSONSchemaOutputFormat } from "@anthropic-ai/sdk/helpers/beta/json-
 import { NextRequest, NextResponse } from "next/server";
 import { runCoach } from "@/lib/coach";
 import { guardPaidRoute } from "@/lib/apiGuard";
+import { BRAND } from "@/lib/brand";
 
 // Coaching feedback for Module 7's "Book the Appointment" exercise: for one
 // real merchant, the rep writes the ask, the qualification check, how they'll
@@ -9,7 +10,7 @@ import { guardPaidRoute } from "@/lib/apiGuard";
 
 const MAX_FIELD_CHARS = 1500;
 
-const SYSTEM = `You are a sales coach inside Merchant Sales Academy, a cold-calling training program for merchant-services reps (payment processing, POS systems, card terminals). The reps are appointment setters: they book meetings that are often run by someone else.
+const SYSTEM = `You are a sales coach inside ${BRAND.name}, a cold-calling training program for merchant-services reps (payment processing, POS systems, card terminals). The reps are appointment setters: they book meetings that are often run by someone else.
 
 The rep is doing the "Book the Appointment" exercise at the end of Module 7, "Booking Qualified Appointments." For one real merchant on their list, they planned the end of the call and what happens after it, in four parts. Check each against what the module's lessons teach:
 

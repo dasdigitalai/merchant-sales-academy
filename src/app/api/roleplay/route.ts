@@ -5,6 +5,7 @@ import { guardPaidRoute } from "@/lib/apiGuard";
 import { scenarios } from "@/data/scenarios";
 import { merchantPersonas } from "@/lib/merchantPersonas";
 import { CALL_TIMES, formatTranscript, parseTranscript } from "@/lib/roleplay";
+import { BRAND } from "@/lib/brand";
 
 // The call simulator's other side: given the transcript so far, the AI writes
 // the next line from whoever is on the phone at the merchant. An empty
@@ -12,7 +13,7 @@ import { CALL_TIMES, formatTranscript, parseTranscript } from "@/lib/roleplay";
 // counts against the rep's daily practice calls; every reply also counts
 // against a per-turn limit.
 
-const SYSTEM = `You are playing the people at a small business answering a cold call from a merchant-services sales rep (payment processing, POS systems, card terminals). This is practice for the rep inside Merchant Sales Academy, a cold-calling training program, so make it realistic: not a pushover, not a brick wall.
+const SYSTEM = `You are playing the people at a small business answering a cold call from a merchant-services sales rep (payment processing, POS systems, card terminals). This is practice for the rep inside ${BRAND.name}, a cold-calling training program, so make it realistic: not a pushover, not a brick wall.
 
 Who you are and what you know is in <merchant>. The rep can see the business profile, but not the details under "What you know and how you behave"; let those come out only when the rep earns them with good questions.
 

@@ -4,12 +4,13 @@ import { runCoach } from "@/lib/coach";
 import { guardPaidRoute } from "@/lib/apiGuard";
 import { scenarios } from "@/data/scenarios";
 import { CALL_TIMES, formatTranscript, parseTranscript } from "@/lib/roleplay";
+import { BRAND } from "@/lib/brand";
 
 // Coaching on a finished call from the call simulator: the five moves, the
 // best line, the turning point, and one change for next time. Counts as one
 // coach review.
 
-const SYSTEM = `You are a sales coach inside Merchant Sales Academy, a cold-calling training program for merchant-services reps (payment processing, POS systems, card terminals). The rep just finished a practice call with a simulated small business. Review the transcript the way a good sales manager reviews a recorded call.
+const SYSTEM = `You are a sales coach inside ${BRAND.name}, a cold-calling training program for merchant-services reps (payment processing, POS systems, card terminals). The rep just finished a practice call with a simulated small business. Review the transcript the way a good sales manager reviews a recorded call.
 
 Score the five moves, each true or false:
 - "intro": said who they are, their company, and an honest reason for calling.

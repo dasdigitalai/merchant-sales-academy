@@ -1,12 +1,14 @@
 import type { Metadata } from "next";
 import { AuthProvider } from "@/components/AuthProvider";
+import { BRAND, themeCss } from "@/lib/brand";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Merchant Sales Academy | Make the Call",
-  description: "Cold-calling training built for merchant-services sales professionals.",
+  title: `${BRAND.name} | ${BRAND.tagline}`,
+  description: BRAND.description,
+  ...(BRAND.icon ? { icons: { icon: BRAND.icon } } : {}),
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  return <html lang="en"><body><AuthProvider>{children}</AuthProvider></body></html>;
+  return <html lang="en"><head><style>{themeCss(BRAND.colors)}</style></head><body><AuthProvider>{children}</AuthProvider></body></html>;
 }

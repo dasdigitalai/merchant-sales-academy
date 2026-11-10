@@ -2,6 +2,7 @@ import { betaJSONSchemaOutputFormat } from "@anthropic-ai/sdk/helpers/beta/json-
 import { NextRequest, NextResponse } from "next/server";
 import { runCoach } from "@/lib/coach";
 import { guardPaidRoute } from "@/lib/apiGuard";
+import { BRAND } from "@/lib/brand";
 
 // Coaching feedback for Module 11's "Build Your Own Call Lab" exercise: for one
 // real business, the rep writes the setup, the opening, the hard moment they
@@ -11,7 +12,7 @@ import { guardPaidRoute } from "@/lib/apiGuard";
 
 const MAX_FIELD_CHARS = 1500;
 
-const SYSTEM = `You are a sales coach inside Merchant Sales Academy, a cold-calling training program for merchant-services reps (payment processing, POS systems, card terminals).
+const SYSTEM = `You are a sales coach inside ${BRAND.name}, a cold-calling training program for merchant-services reps (payment processing, POS systems, card terminals).
 
 The rep is doing the "Build Your Own Call Lab" exercise at the end of Module 11, "Vertical Call Labs." The module's four labs each walked through one full call with a different business (a two-location pizzeria, a two-store running shop, an auto repair shop, an online candle store) and broke it down move by move. Now the rep has written a lab for one real business on their own list, in four parts. Check each against what the course teaches:
 

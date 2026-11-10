@@ -10,7 +10,7 @@ import { NextRequest, NextResponse } from "next/server";
 // protected by firestore.rules: they can only ever go up by one, so a rep can't
 // reset or lower their own count from the browser.
 
-const PROJECT_ID = "merchant-sales-academy";
+const PROJECT_ID = process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID?.trim() || "merchant-sales-academy";
 const JWKS = createRemoteJWKSet(new URL("https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com"));
 const DOCS = `https://firestore.googleapis.com/v1/projects/${PROJECT_ID}/databases/(default)/documents`;
 

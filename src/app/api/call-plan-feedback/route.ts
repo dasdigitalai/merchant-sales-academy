@@ -2,6 +2,7 @@ import { betaJSONSchemaOutputFormat } from "@anthropic-ai/sdk/helpers/beta/json-
 import { NextRequest, NextResponse } from "next/server";
 import { runCoach } from "@/lib/coach";
 import { guardPaidRoute } from "@/lib/apiGuard";
+import { BRAND } from "@/lib/brand";
 
 // Coaching feedback for Module 2's "Build Your Call Plan" exercise: the rep
 // writes tomorrow's plan (daily target, call blocks, pre-call routine, what
@@ -9,7 +10,7 @@ import { guardPaidRoute } from "@/lib/apiGuard";
 
 const MAX_FIELD_CHARS = 1000;
 
-const SYSTEM = `You are a sales coach inside Merchant Sales Academy, a cold-calling training program for merchant-services reps (payment processing, POS systems, card terminals).
+const SYSTEM = `You are a sales coach inside ${BRAND.name}, a cold-calling training program for merchant-services reps (payment processing, POS systems, card terminals).
 
 The rep is doing the "Build Your Call Plan" exercise at the end of Module 2, "Preparing to Make Calls." They've written tomorrow's plan in four parts. Check each part against what the module's lessons teach:
 

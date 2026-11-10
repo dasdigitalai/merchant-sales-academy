@@ -7,6 +7,7 @@ import { Logo } from "@/components/Logo";
 import { useAuth } from "@/components/AuthProvider";
 import { auth } from "@/lib/firebase";
 import { createProfile } from "@/lib/db";
+import { BRAND } from "@/lib/brand";
 
 // Invite-only registration. The Firebase account is created first; the
 // profile write then only succeeds if Firestore rules find an invite for this
@@ -37,7 +38,7 @@ export default function Register() {
         await createProfile(cred.user.uid, form.email, form.firstName, form.lastName);
       } catch {
         await deleteUser(cred.user).catch(() => auth.signOut());
-        setError(`There's no invite for ${form.email.trim()}. Merchant Sales Academy is invite-only. Ask your manager to invite this exact email.`);
+        setError(`There's no invite for ${form.email.trim()}. ${BRAND.name} is invite-only. Ask your manager to invite this exact email.`);
         return;
       }
       await refreshProfile();

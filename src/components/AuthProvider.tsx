@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { createContext, useCallback, useContext, useEffect, useRef, useState } from "react";
 import { auth } from "@/lib/firebase";
 import { loadProfile, type Profile, type Role } from "@/lib/db";
+import { BRAND } from "@/lib/brand";
 
 // Signed-in Firebase user plus their Firestore profile (name and role).
 // A user with no profile signed up without an invite and has no access.
@@ -54,7 +55,7 @@ export function RequireAuth({ role, children }: { role?: Role; children: React.R
   }, [loading, user, router]);
 
   if (loading || !user) return <Centered><p style={{ color: "var(--muted)" }}>Loading…</p></Centered>;
-  if (!profile) return <Centered><h2 style={{ fontFamily: "Georgia,serif" }}>No access yet.</h2><p style={{ color: "var(--muted)", lineHeight: 1.6 }}>Merchant Sales Academy is invite-only, and there&apos;s no invite for {user.email}. Ask your manager to invite this email, then sign in again.</p><button className="btn btn-outline" onClick={() => void logOut()}>Sign out</button></Centered>;
+  if (!profile) return <Centered><h2 style={{ fontFamily: "Georgia,serif" }}>No access yet.</h2><p style={{ color: "var(--muted)", lineHeight: 1.6 }}>{BRAND.name} is invite-only, and there&apos;s no invite for {user.email}. Ask your manager to invite this email, then sign in again.</p><button className="btn btn-outline" onClick={() => void logOut()}>Sign out</button></Centered>;
   if (role && profile.role !== role) return <Centered><h2 style={{ fontFamily: "Georgia,serif" }}>Managers only.</h2><p style={{ color: "var(--muted)" }}>This area is for sales managers.</p><Link className="btn btn-primary" href="/dashboard">Go to my dashboard →</Link></Centered>;
   return <>{children}</>;
 }

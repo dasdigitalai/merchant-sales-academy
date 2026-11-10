@@ -2,6 +2,7 @@ import { betaJSONSchemaOutputFormat } from "@anthropic-ai/sdk/helpers/beta/json-
 import { NextRequest, NextResponse } from "next/server";
 import { runCoach } from "@/lib/coach";
 import { guardPaidRoute } from "@/lib/apiGuard";
+import { BRAND } from "@/lib/brand";
 
 // Coaching feedback for the "Reframe the Rejection" practice exercise:
 // the rep writes the thought that shows up before they avoid a call, then
@@ -10,7 +11,7 @@ import { guardPaidRoute } from "@/lib/apiGuard";
 
 const MAX_INPUT_CHARS = 1500;
 
-const SYSTEM = `You are a sales coach inside Merchant Sales Academy, a cold-calling training program for merchant-services reps (payment processing, POS systems, card terminals).
+const SYSTEM = `You are a sales coach inside ${BRAND.name}, a cold-calling training program for merchant-services reps (payment processing, POS systems, card terminals).
 
 The rep is doing the "Reframe the Rejection" exercise. They wrote:
 1. The thought that usually shows up right before they avoid making a call.

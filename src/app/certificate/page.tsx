@@ -7,6 +7,7 @@ import { fullName, loadLearnerData, type LearnerData } from "@/lib/db";
 import { certification, nextItem } from "@/lib/stats";
 import { lessonHref } from "@/data/curriculum";
 import { downloadCertificatePdf } from "@/lib/pdf";
+import { BRAND } from "@/lib/brand";
 
 // The Appointment-Setter Certification. Shows the certificate once every module
 // is complete (see certification() in lib/stats), and what's left until then.
@@ -43,11 +44,11 @@ export default function CertificatePage() {
       <h1 className="display" style={{ fontSize: 40, margin: "14px 0 24px" }}>You’re certified.</h1>
       <section className="card" style={{ padding: 14, background: "var(--green)" }}>
         <div style={{ background: "white", border: "3px solid var(--lime)", borderRadius: 8, padding: "clamp(28px,6vw,60px) clamp(18px,4vw,40px)", textAlign: "center" }}>
-          <small style={{ fontWeight: 900, letterSpacing: ".2em", color: "var(--green)" }}>MERCHANT SALES ACADEMY</small>
+          <small style={{ fontWeight: 900, letterSpacing: ".2em", color: "var(--green)" }}>{BRAND.name.toUpperCase()}</small>
           <h2 style={{ fontFamily: "Georgia,serif", fontSize: "clamp(26px,4.5vw,40px)", fontWeight: 400, margin: "18px 0 22px" }}>Appointment-Setter Certification</h2>
           <p style={{ color: "var(--muted)", margin: 0 }}>This certifies that</p>
           <p style={{ fontFamily: "Georgia,serif", fontStyle: "italic", fontSize: "clamp(26px,4.5vw,38px)", color: "var(--green)", margin: "10px auto 14px", paddingBottom: 12, borderBottom: "1px solid var(--line)", maxWidth: 440 }}>{name || "You"}</p>
-          <p style={{ maxWidth: 520, margin: "0 auto", lineHeight: 1.6 }}>has completed all twelve modules of the Merchant Sales Academy cold-calling program, passed the final scenario call and the final exam, and committed to a 30-day action plan.</p>
+          <p style={{ maxWidth: 520, margin: "0 auto", lineHeight: 1.6 }}>has completed all twelve modules of the {BRAND.name} cold-calling program, passed the final scenario call and the final exam, and committed to a 30-day action plan.</p>
           <div style={{ display: "flex", justifyContent: "center", gap: "clamp(30px,10vw,120px)", marginTop: 34, flexWrap: "wrap" }}>
             <div><small style={{ fontWeight: 900, letterSpacing: ".12em", color: "var(--muted)" }}>CERTIFIED ON</small><div style={{ fontFamily: "Georgia,serif", fontSize: 18, marginTop: 6 }}>{dateText}</div></div>
             <div><small style={{ fontWeight: 900, letterSpacing: ".12em", color: "var(--muted)" }}>FINAL EXAM</small><div style={{ fontFamily: "Georgia,serif", fontSize: 18, marginTop: 6 }}>{cert.examScore ?? "Passed"}</div></div>
