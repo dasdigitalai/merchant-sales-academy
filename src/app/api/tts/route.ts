@@ -41,7 +41,12 @@ export async function POST(req: NextRequest) {
     : process.env.GOOGLE_TTS_VOICE?.trim() || DEFAULT_TTS_VOICE;
 
   let res = await synthesize(trimmed, primaryVoice, apiKey);
+  let usedVoice = primaryVoice;
+  let primaryError: string | undefined;
   if (!res.ok) {
+    primaryError = (await res.text().catch(() => "")).slice(0, 300);
+    console.error("TTS primary voice failed", primaryVoice, res.status, primaryError);
+    usedVoice = FALLBACK_VOICE;
     // Chirp3-HD may not be enabled on every project yet - retry with a
     // broadly available voice instead of failing the whole request.
     res = await synthesize(trimmed, FALLBACK_VOICE, apiKey);
@@ -53,5 +58,5 @@ export async function POST(req: NextRequest) {
   }
 
   const data = await res.json();
-  return NextResponse.json({ audioContent: data.audioContent as string });
+  return NextResponse.json({ audioContent: data.audioContent as string, voice: usedVoice, requestedVoice: primaryVoice, primaryError });
 }
