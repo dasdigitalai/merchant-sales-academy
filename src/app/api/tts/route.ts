@@ -1,9 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
 import { guardPaidRoute } from "@/lib/apiGuard";
+import { DEFAULT_TTS_VOICE, isAllowedVoice } from "@/lib/ttsVoices";
 
-// Google's newest, most natural-sounding voice line. Falls back to a widely
-// available Neural2 voice if Chirp3-HD isn't enabled for this project/key.
-const PRIMARY_VOICE = "en-US-Chirp3-HD-Charon";
+// Default voice: set GOOGLE_TTS_VOICE in the hosting environment to change it
+// without a code edit (any Google Cloud TTS voice name). Learners can override
+// it per-browser with the voice picker, limited to the list in ttsVoices.ts.
+// Falls back to a widely available Neural2 voice if the chosen voice fails.
 const FALLBACK_VOICE = "en-US-Neural2-D";
 
 async function synthesize(text: string, voiceName: string, apiKey: string) {
@@ -24,7 +26,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Text-to-speech is not configured." }, { status: 500 });
   }
 
-  const { text } = await req.json();
+  const { text, voice } = await req.json();
   if (!text || typeof text !== "string") {
     return NextResponse.json({ error: "Missing text." }, { status: 400 });
   }
@@ -34,7 +36,11 @@ export async function POST(req: NextRequest) {
 
   const trimmed = text.slice(0, 4800);
 
-  let res = await synthesize(trimmed, PRIMARY_VOICE, apiKey);
+  const primaryVoice = isAllowedVoice(voice)
+    ? voice
+    : process.env.GOOGLE_TTS_VOICE?.trim() || DEFAULT_TTS_VOICE;
+
+  let res = await synthesize(trimmed, primaryVoice, apiKey);
   if (!res.ok) {
     // Chirp3-HD may not be enabled on every project yet - retry with a
     // broadly available voice instead of failing the whole request.
