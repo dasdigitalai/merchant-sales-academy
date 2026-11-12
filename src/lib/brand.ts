@@ -8,6 +8,7 @@ type RGB = [number, number, number];
 export type Brand = {
   id: BrandId;
   name: string;            // "Merchant Sales Academy"
+  company: string;         // the rep's company in example calls ("Hi, this is Alex with ___")
   logoTop: string;         // first line of the text logo (unused when a wordmark is drawn)
   logoBottom: string;      // second line, under the wordmark or text
   tagline: string;
@@ -25,6 +26,7 @@ const BRANDS: Record<BrandId, Brand> = {
   msa: {
     id: "msa",
     name: "Merchant Sales Academy",
+    company: "BytePOS",
     logoTop: "MERCHANT SALES",
     logoBottom: "ACADEMY",
     tagline: "Make the Call",
@@ -37,6 +39,7 @@ const BRANDS: Record<BrandId, Brand> = {
   kadima: {
     id: "kadima",
     name: "Kadima Sales Academy",
+    company: "Kadima Payments",
     logoTop: "KADIMA",
     logoBottom: "SALES ACADEMY",
     tagline: "Make the Call",
