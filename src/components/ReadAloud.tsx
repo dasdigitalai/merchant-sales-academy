@@ -1,6 +1,9 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import { authedPost } from "@/lib/authedFetch";
+import { TTS_VOICES } from "@/lib/ttsVoices";
+
+const VOICE_STORAGE_KEY = "readAloudVoice";
 
 // Fallback-only: used if the Cloud TTS API request fails for any reason
 // (network issue, quota, misconfiguration). Network voices sound far less
@@ -28,6 +31,23 @@ export function ReadAloud({ targetId }: { targetId: string }) {
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const usingFallbackRef = useRef(false);
   const fallbackVoiceRef = useRef<SpeechSynthesisVoice | null>(null);
+  // "" means "use the site default" (GOOGLE_TTS_VOICE on the server).
+  const [voice, setVoice] = useState("");
+
+  useEffect(() => {
+    try {
+      const saved = window.localStorage.getItem(VOICE_STORAGE_KEY);
+      if (saved && TTS_VOICES.some((v) => v.id === saved)) setVoice(saved);
+    } catch {}
+  }, []);
+
+  function chooseVoice(id: string) {
+    setVoice(id);
+    try {
+      if (id) window.localStorage.setItem(VOICE_STORAGE_KEY, id);
+      else window.localStorage.removeItem(VOICE_STORAGE_KEY);
+    } catch {}
+  }
 
   useEffect(() => {
     if (typeof window === "undefined" || !("speechSynthesis" in window)) return;
@@ -73,7 +93,7 @@ export function ReadAloud({ targetId }: { targetId: string }) {
 
     try {
       // Over the daily limit (429) this throws too, and the browser's own voice reads it instead.
-      const res = await authedPost("/api/tts", { text });
+      const res = await authedPost("/api/tts", voice ? { text, voice } : { text });
       if (!res.ok) throw new Error("tts request failed");
       const { audioContent } = await res.json();
       if (!audioContent) throw new Error("no audio returned");
@@ -110,7 +130,20 @@ export function ReadAloud({ targetId }: { targetId: string }) {
 
   return (
     <div style={{ display: "flex", gap: 8, alignItems: "center", marginBottom: 28 }}>
-      {state === "idle" && <button type="button" className="btn btn-outline" onClick={start}>🔊 Read this lesson aloud</button>}
+      {state === "idle" && <>
+        <button type="button" className="btn btn-outline" onClick={start}>🔊 Read this lesson aloud</button>
+        <label style={{ display: "flex", gap: 6, alignItems: "center", fontSize: 14 }}>
+          Voice
+          <select
+            value={voice}
+            onChange={(e) => chooseVoice(e.target.value)}
+            style={{ padding: "6px 8px", borderRadius: 6, border: "1px solid currentColor", background: "transparent", color: "inherit" }}
+          >
+            <option value="">Default</option>
+            {TTS_VOICES.map((v) => <option key={v.id} value={v.id}>{v.label}</option>)}
+          </select>
+        </label>
+      </>}
       {state === "loading" && <button type="button" className="btn btn-outline" disabled>Loading audio…</button>}
       {(state === "speaking" || state === "paused") && <>
         <button type="button" className="btn btn-outline" onClick={togglePause}>{state === "speaking" ? "⏸ Pause" : "▶ Resume"}</button>
