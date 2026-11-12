@@ -1,3 +1,5 @@
+import { BRAND } from "@/lib/brand";
+
 // Module knowledge checks. Scenario-based on purpose: each question has
 // distractors that sound reasonable, and some name a real concept from a
 // different lesson, so the rep has to apply the idea rather than recognize
@@ -190,7 +192,7 @@ export const module3Quiz: QuizQuestion[] = [
   },
   {
     prompt:
-      "Priya's opener has a strong reason and a good question, but merchants keep cutting her off. A recording shows she reads it word for word at an even pace, and her voice rises at the end of every sentence: \"It's Priya with BytePOS?\" What's the best fix?",
+      "Priya's opener has a strong reason and a good question, but merchants keep cutting her off. A recording shows she reads it word for word at an even pace, and her voice rises at the end of every sentence: \"It's Priya with "+BRAND.company+"?\" What's the best fix?",
     choices: [
       "Write a longer, more detailed script so she never has to pause or search for words.",
       "Speed up so she reaches the question before the merchant has a chance to interrupt.",
@@ -703,7 +705,7 @@ export const module10Quiz: QuizQuestion[] = [
       "\"Hi, is Maria there? It's personal.\"",
       "\"Hi, I'm returning Maria's call.\"",
       "\"Hi, I'm a customer and I had a problem with a charge. Can I talk to the owner?\"",
-      "\"Hi, this is Alex with BytePOS. I help restaurants around here figure out what they're really paying to take cards. Who am I speaking with?\"",
+      "\"Hi, this is Alex with "+BRAND.company+". I help restaurants around here figure out what they're really paying to take cards. Who am I speaking with?\"",
     ],
     answer: 3,
     explanation:
@@ -743,7 +745,7 @@ export const module10Quiz: QuizQuestion[] = [
       "Last week Jenna, the host, told Alex the owner is easier to reach on Tuesdays after 2. It's Tuesday at 2:30. How should he open the call?",
     choices: [
       "\"Hi, can I speak to the owner, please?\"",
-      "\"Hi Jenna, it's Alex with BytePOS. You mentioned Tuesdays after two are quieter, so here I am. Is Maria around?\"",
+      "\"Hi Jenna, it's Alex with "+BRAND.company+". You mentioned Tuesdays after two are quieter, so here I am. Is Maria around?\"",
       "\"Hi, it's Alex. The owner's expecting my call.\"",
       "\"Hi, I called last week. Did anyone give Maria my message?\"",
     ],
@@ -861,7 +863,7 @@ export const finalExam: QuizQuestion[] = [
   {
     prompt: "Which opener is the strongest?",
     choices: [
-      "\"Hi Maria, this is Alex with BytePOS. I saw you opened a second location this spring. Did you keep the same processor for both?\"",
+      "\"Hi Maria, this is Alex with "+BRAND.company+". I saw you opened a second location this spring. Did you keep the same processor for both?\"",
       "\"Hi, sorry to bother you, I know you're busy. Do you have a minute to talk about your credit card processing?\"",
       "\"Hi Maria, how are you today? I'm calling because we're offering great rates on processing this month.\"",
       "\"Hi, this is Alex. Would you like to save money on your processing fees?\"",
