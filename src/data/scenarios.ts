@@ -2,6 +2,8 @@
 // sees the profile. What the simulated merchant knows beyond it lives in
 // lib/merchantPersonas.ts, which only the server loads.
 
+import { BRAND, type BrandId } from "@/lib/brand";
+
 export type Scenario = {
   id: string;
   business: string;
@@ -10,9 +12,10 @@ export type Scenario = {
   decisionMaker: string;
   profile: string;
   objection: string;
+  onlyFor?: BrandId;       // show this merchant only on one brand's site
 };
 
-export const scenarios: Scenario[] = [
+const allScenarios: Scenario[] = [
   {
     id: "lucias-kitchen",
     business: "Lucia’s Kitchen",
@@ -49,4 +52,16 @@ export const scenarios: Scenario[] = [
     profile: "Women’s clothing boutique downtown that opened an online store last fall. The store opens at 10, and weekends are busiest. Priya posted on the store’s social media that online returns have been a headache.",
     objection: "Not interested.",
   },
+  {
+    id: "zaytoon-shawarma",
+    business: "Zaytoon Shawarma",
+    vertical: "Restaurant",
+    answerer: "Omar, the owner’s son, who works the counter",
+    decisionMaker: "Khalil, the owner",
+    profile: "Counter-service shawarma restaurant, one location, open for over twenty years. Khalil runs it the old way: no POS system, just an electronic cash register, with cards taken on a separate countertop terminal. A few online reviews mention a sign by the register that says “Cash preferred.” The lunch rush runs from about 11:30 to 2.",
+    objection: "I don’t need a computer. My register works fine.",
+    onlyFor: "kadima",
+  },
 ];
+
+export const scenarios: Scenario[] = allScenarios.filter((s) => !s.onlyFor || s.onlyFor === BRAND.id);
