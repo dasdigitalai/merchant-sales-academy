@@ -47,7 +47,7 @@ service cloud.firestore {
 
     match /usage/{uid}/{kind}/{day} {
       allow read: if isSelf(uid) || isManager();
-      allow create: if isSelf(uid) && isInvitedUser() && kind in ["coach", "tts", "roleplay", "roleplayTurn"] && startsAtOne();
+      allow create: if isSelf(uid) && isInvitedUser() && kind in ["coach", "tts", "roleplay", "roleplayTurn", "roleplayVoice"] && startsAtOne();
       allow update: if isSelf(uid) && isInvitedUser() && goesUpByOne();
       allow delete: if false;
     }

@@ -15,8 +15,10 @@ const JWKS = createRemoteJWKSet(new URL("https://www.googleapis.com/service_acco
 const DOCS = `https://firestore.googleapis.com/v1/projects/${PROJECT_ID}/databases/(default)/documents`;
 
 // roleplay counts practice calls started; roleplayTurn counts every merchant
-// reply, so one call can't run up an unbounded bill.
-export type UsageKind = "coach" | "tts" | "roleplay" | "roleplayTurn";
+// reply, so one call can't run up an unbounded bill. roleplayVoice counts the
+// merchant replies spoken aloud, kept apart from tts so a practice call doesn't
+// use up the lesson read-alouds.
+export type UsageKind = "coach" | "tts" | "roleplay" | "roleplayTurn" | "roleplayVoice";
 
 // Defaults; override per environment in Vercel without a code change.
 const LIMITS: Record<UsageKind, { perUser: number; team: number; label: string }> = {
@@ -24,6 +26,7 @@ const LIMITS: Record<UsageKind, { perUser: number; team: number; label: string }
   tts: { perUser: envInt("TTS_DAILY_LIMIT_PER_USER", 60), team: envInt("TTS_DAILY_LIMIT_TEAM", 600), label: "read-alouds" },
   roleplay: { perUser: envInt("ROLEPLAY_DAILY_LIMIT_PER_USER", 5), team: envInt("ROLEPLAY_DAILY_LIMIT_TEAM", 100), label: "practice calls" },
   roleplayTurn: { perUser: envInt("ROLEPLAY_TURN_DAILY_LIMIT_PER_USER", 150), team: envInt("ROLEPLAY_TURN_DAILY_LIMIT_TEAM", 3000), label: "practice-call replies" },
+  roleplayVoice: { perUser: envInt("ROLEPLAY_VOICE_DAILY_LIMIT_PER_USER", 150), team: envInt("ROLEPLAY_VOICE_DAILY_LIMIT_TEAM", 3000), label: "spoken practice-call replies" },
 };
 
 function envInt(name: string, fallback: number) {

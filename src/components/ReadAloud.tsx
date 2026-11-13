@@ -1,27 +1,7 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import { authedPost } from "@/lib/authedFetch";
-
-// Fallback-only: used if the Cloud TTS API request fails for any reason
-// (network issue, quota, misconfiguration). Network voices sound far less
-// robotic than the default local SAPI voices most browsers pick first.
-const PREFERRED_FALLBACK_VOICE_NAMES = [
-  "Google US English",
-  "Microsoft Aria Online (Natural) - English (United States)",
-  "Microsoft Jenny Online (Natural) - English (United States)",
-  "Microsoft Guy Online (Natural) - English (United States)",
-  "Google UK English Female",
-];
-
-function pickBestFallbackVoice(voices: SpeechSynthesisVoice[]): SpeechSynthesisVoice | null {
-  for (const name of PREFERRED_FALLBACK_VOICE_NAMES) {
-    const match = voices.find((v) => v.name === name);
-    if (match) return match;
-  }
-  const anyNetworkEnglish = voices.find((v) => !v.localService && v.lang.startsWith("en"));
-  if (anyNetworkEnglish) return anyNetworkEnglish;
-  return voices.find((v) => v.lang.startsWith("en")) ?? voices[0] ?? null;
-}
+import { pickBestFallbackVoice } from "@/lib/browserVoice";
 
 export function ReadAloud({ targetId }: { targetId: string }) {
   const [state, setState] = useState<"idle" | "loading" | "speaking" | "paused">("idle");
