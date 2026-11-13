@@ -38,6 +38,14 @@ export function useCallVoice(preferred?: { answerer: string; decisionMaker: stri
   const clips = useRef(new Map<string, string>());
   const fallback = useRef<SpeechSynthesisVoice | null>(null);
 
+  // Settles the promise speak() returned: the line finished, was cut off, or failed.
+  const waiter = useRef<(() => void) | null>(null);
+  const release = useCallback(() => {
+    const done = waiter.current;
+    waiter.current = null;
+    done?.();
+  }, []);
+
   const halt = useCallback(() => {
     const a = audio.current;
     if (a) {
@@ -46,7 +54,8 @@ export function useCallVoice(preferred?: { answerer: string; decisionMaker: stri
       a.pause();
     }
     if (typeof window !== "undefined" && "speechSynthesis" in window) window.speechSynthesis.cancel();
-  }, []);
+    release();
+  }, [release]);
 
   useEffect(() => {
     try {
@@ -103,28 +112,37 @@ export function useCallVoice(preferred?: { answerer: string; decisionMaker: stri
     return voice;
   };
 
+  // Speaks a line. The promise it returns settles when the line has finished (or
+  // was cut off, or couldn't be spoken), so a caller can wait before the next one.
+  // voiceId overrides the voice picked for this speaker (the Virtual Salesperson has its own).
   const speak = useCallback(
-    async (text: string, speaker?: string, force = false) => {
+    async (text: string, speaker?: string, force = false, voiceId?: string) => {
       const clean = speakable(text);
       if (!clean || (mutedRef.current && !force)) return;
       const id = ++run.current;
       const alive = () => run.current === id;
       halt();
       setSpeaking(true);
+      const done = new Promise<void>((resolve) => {
+        waiter.current = resolve;
+      });
+      const finish = () => {
+        if (!alive()) return;
+        setSpeaking(false);
+        release();
+      };
 
       const browser = () => {
-        if (!("speechSynthesis" in window)) return setSpeaking(false);
+        if (!("speechSynthesis" in window)) return finish();
         const utter = new SpeechSynthesisUtterance(clean);
         if (fallback.current) utter.voice = fallback.current;
         utter.rate = 1.02;
-        utter.onend = utter.onerror = () => {
-          if (alive()) setSpeaking(false);
-        };
+        utter.onend = utter.onerror = finish;
         window.speechSynthesis.speak(utter);
       };
 
       try {
-        const voice = voiceFor(speaker);
+        const voice = voiceId ?? voiceFor(speaker);
         const clipKey = `${voice}|${clean}`;
         let clip = clips.current.get(clipKey);
         if (!clip) {
@@ -136,9 +154,7 @@ export function useCallVoice(preferred?: { answerer: string; decisionMaker: stri
         }
         if (!alive()) return;
         const a = audio.current ?? (audio.current = new Audio());
-        a.onended = () => {
-          if (alive()) setSpeaking(false);
-        };
+        a.onended = finish;
         a.onerror = () => {
           if (alive()) browser();
         };
@@ -147,8 +163,9 @@ export function useCallVoice(preferred?: { answerer: string; decisionMaker: stri
       } catch {
         if (alive()) browser();
       }
+      await done;
     },
-    [halt],
+    [halt, release],
   );
 
   const toggleMute = useCallback(() => {
