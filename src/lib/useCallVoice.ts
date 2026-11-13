@@ -24,7 +24,11 @@ const speakable = (text: string) => text.replace(/\[[^\]]*\]/g, " ").replace(/\s
 // Same person, same voice, even if the label drifts ("Lucia (owner)" vs "Lucia").
 const personKey = (speaker?: string) => (speaker ?? "").replace(/\(.*?\)/g, "").trim().toLowerCase();
 
-export function useCallVoice() {
+// preferred: the scenario's voices. Whoever speaks first on the call (the person
+// who answers) gets the answerer's voice and the next person the decision-maker's.
+export function useCallVoice(preferred?: { answerer: string; decisionMaker: string }) {
+  const preferredRef = useRef(preferred);
+  preferredRef.current = preferred;
   const [muted, setMuted] = useState(false);
   const [speaking, setSpeaking] = useState(false);
   const mutedRef = useRef(false);
@@ -91,7 +95,9 @@ export function useCallVoice() {
     const key = personKey(speaker);
     let voice = voices.current.get(key);
     if (!voice) {
-      voice = CALL_VOICES[voices.current.size % CALL_VOICES.length];
+      const n = voices.current.size;
+      const set = preferredRef.current;
+      voice = n === 0 && set ? set.answerer : n === 1 && set ? set.decisionMaker : CALL_VOICES[n % CALL_VOICES.length];
       voices.current.set(key, voice);
     }
     return voice;

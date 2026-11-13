@@ -1,12 +1,12 @@
 import { NextRequest, NextResponse } from "next/server";
 import { guardPaidRoute } from "@/lib/apiGuard";
-import { DEFAULT_TTS_VOICE, isAllowedVoice } from "@/lib/ttsVoices";
+import { DEFAULT_TTS_VOICE, isAllowedVoice, voiceFallbacks, voiceLanguage } from "@/lib/ttsVoices";
 
 // Default voice: set GOOGLE_TTS_VOICE in the hosting environment to change it
-// without a code edit (any Google Cloud TTS voice name). Learners can override
-// it per-browser with the voice picker, limited to the list in ttsVoices.ts.
-// Falls back to a widely available Neural2 voice if the chosen voice fails.
-const FALLBACK_VOICE = "en-US-Neural2-D";
+// without a code edit (any Google Cloud TTS voice name). Callers can ask for a
+// voice (and accent), limited to the list in ttsVoices.ts. If the chosen voice
+// fails, it retries with the same speaker in the US accent, then a Neural2 voice
+// of the same gender (voiceFallbacks).
 
 async function synthesize(text: string, voiceName: string, apiKey: string) {
   return fetch(`https://texttospeech.googleapis.com/v1/text:synthesize?key=${apiKey}`, {
@@ -14,7 +14,7 @@ async function synthesize(text: string, voiceName: string, apiKey: string) {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
       input: { text },
-      voice: { languageCode: "en-US", name: voiceName },
+      voice: { languageCode: voiceLanguage(voiceName), name: voiceName },
       audioConfig: { audioEncoding: "MP3", speakingRate: 1.0 },
     }),
   });
@@ -43,21 +43,24 @@ export async function POST(req: NextRequest) {
     ? voice
     : process.env.GOOGLE_TTS_VOICE?.trim() || DEFAULT_TTS_VOICE;
 
-  let res = await synthesize(trimmed, primaryVoice, apiKey);
+  // Chirp3-HD (or one accent of it) may not be enabled on every project yet, so
+  // retry with the fallbacks instead of failing the whole request.
+  const candidates = voiceFallbacks(primaryVoice);
+  let res: Response | undefined;
   let usedVoice = primaryVoice;
   let primaryError: string | undefined;
-  if (!res.ok) {
-    primaryError = (await res.text().catch(() => "")).slice(0, 300);
-    console.error("TTS primary voice failed", primaryVoice, res.status, primaryError);
-    usedVoice = FALLBACK_VOICE;
-    // Chirp3-HD may not be enabled on every project yet - retry with a
-    // broadly available voice instead of failing the whole request.
-    res = await synthesize(trimmed, FALLBACK_VOICE, apiKey);
+  let lastError = "";
+  for (const [i, name] of candidates.entries()) {
+    res = await synthesize(trimmed, name, apiKey);
+    usedVoice = name;
+    if (res.ok) break;
+    lastError = (await res.text().catch(() => "")).slice(0, 300);
+    if (i === 0) primaryError = lastError;
+    console.error("TTS voice failed", name, res.status, lastError);
   }
 
-  if (!res.ok) {
-    const errText = await res.text();
-    return NextResponse.json({ error: "Text-to-speech request failed.", detail: errText }, { status: 502 });
+  if (!res?.ok) {
+    return NextResponse.json({ error: "Text-to-speech request failed.", detail: lastError }, { status: 502 });
   }
 
   const data = await res.json();
