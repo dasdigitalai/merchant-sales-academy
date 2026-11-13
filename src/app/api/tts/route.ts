@@ -26,15 +26,18 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Text-to-speech is not configured." }, { status: 500 });
   }
 
-  const { text, voice } = await req.json();
+  const { text, voice, purpose } = await req.json();
   if (!text || typeof text !== "string") {
     return NextResponse.json({ error: "Missing text." }, { status: 400 });
   }
-  // Google's synthesize endpoint caps input at 5000 bytes.
-  const blocked = await guardPaidRoute(req, "tts");
+  // The call simulator speaks the merchant's replies (a few sentences each), with
+  // its own daily limit and a shorter cap on the text.
+  const roleplay = purpose === "roleplay";
+  const blocked = await guardPaidRoute(req, roleplay ? "roleplayVoice" : "tts");
   if (blocked) return blocked;
 
-  const trimmed = text.slice(0, 4800);
+  // Google's synthesize endpoint caps input at 5000 bytes.
+  const trimmed = text.slice(0, roleplay ? 1000 : 4800);
 
   const primaryVoice = isAllowedVoice(voice)
     ? voice

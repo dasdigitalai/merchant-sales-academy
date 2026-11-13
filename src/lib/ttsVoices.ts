@@ -14,6 +14,16 @@ export const TTS_VOICES = [
 
 export const DEFAULT_TTS_VOICE = "en-US-Chirp3-HD-Charon";
 
+// The call simulator gives each person on the phone their own voice, handed out
+// in the order they first speak (whoever answers, then the decision-maker), and
+// alternating male/female so two speakers never sound alike. All are on the list above.
+export const CALL_VOICES = [
+  "en-US-Chirp3-HD-Charon",
+  "en-US-Chirp3-HD-Aoede",
+  "en-US-Chirp3-HD-Orus",
+  "en-US-Chirp3-HD-Kore",
+] as const;
+
 export function isAllowedVoice(v: unknown): v is string {
   return typeof v === "string" && TTS_VOICES.some((voice) => voice.id === v);
 }
