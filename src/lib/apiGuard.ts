@@ -24,9 +24,10 @@ export type UsageKind = "coach" | "tts" | "roleplay" | "roleplayTurn" | "rolepla
 const LIMITS: Record<UsageKind, { perUser: number; team: number; label: string }> = {
   coach: { perUser: envInt("COACH_DAILY_LIMIT_PER_USER", 25), team: envInt("COACH_DAILY_LIMIT_TEAM", 300), label: "AI coach reviews" },
   tts: { perUser: envInt("TTS_DAILY_LIMIT_PER_USER", 60), team: envInt("TTS_DAILY_LIMIT_TEAM", 600), label: "read-alouds" },
-  roleplay: { perUser: envInt("ROLEPLAY_DAILY_LIMIT_PER_USER", 5), team: envInt("ROLEPLAY_DAILY_LIMIT_TEAM", 100), label: "practice calls" },
-  roleplayTurn: { perUser: envInt("ROLEPLAY_TURN_DAILY_LIMIT_PER_USER", 150), team: envInt("ROLEPLAY_TURN_DAILY_LIMIT_TEAM", 3000), label: "practice-call replies" },
-  roleplayVoice: { perUser: envInt("ROLEPLAY_VOICE_DAILY_LIMIT_PER_USER", 150), team: envInt("ROLEPLAY_VOICE_DAILY_LIMIT_TEAM", 3000), label: "spoken practice-call replies" },
+  roleplay: { perUser: envInt("ROLEPLAY_DAILY_LIMIT_PER_USER", 10), team: envInt("ROLEPLAY_DAILY_LIMIT_TEAM", 200), label: "practice calls" },
+  // A call is at most ~20 merchant replies, so these leave room for 10 long calls a day.
+  roleplayTurn: { perUser: envInt("ROLEPLAY_TURN_DAILY_LIMIT_PER_USER", 300), team: envInt("ROLEPLAY_TURN_DAILY_LIMIT_TEAM", 6000), label: "practice-call replies" },
+  roleplayVoice: { perUser: envInt("ROLEPLAY_VOICE_DAILY_LIMIT_PER_USER", 300), team: envInt("ROLEPLAY_VOICE_DAILY_LIMIT_TEAM", 6000), label: "spoken practice-call replies" },
 };
 
 function envInt(name: string, fallback: number) {
