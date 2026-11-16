@@ -1,4 +1,5 @@
 "use client";
+import { ArrowIcon } from "@/components/ArrowIcon";
 import Link from "next/link";
 import { Logo } from "./Logo";
 import { RequireAuth, useAuth } from "./AuthProvider";
@@ -11,7 +12,7 @@ export function ManagerShell({ children }: { children: React.ReactNode }) {
         <Logo light />
         <nav style={{ display: "flex", gap: 25, fontSize: 13, fontWeight: 800, color: "#c9d7d3", alignItems: "center" }}>
           <Link href="/manager" style={{ color: "var(--lime)" }}>Team overview</Link>
-          <Link href="/dashboard">Learner view →</Link>
+          <Link href="/dashboard">Learner view <ArrowIcon dir="right" onDark /></Link>
           <button onClick={() => void logOut()} style={{ background: "none", border: 0, color: "#c9d7d3", fontWeight: 800, fontSize: 13, cursor: "pointer" }}>Sign out</button>
         </nav>
       </div>

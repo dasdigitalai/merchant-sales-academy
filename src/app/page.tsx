@@ -47,7 +47,7 @@ export default function Home() {
               ["01","DECODE","Understand the fear response, avoidance loop, and mental stories that keep your hand off the phone.","KNOW WHAT'S HAPPENING"],
               ["02","DRILL","Run realistic opening, objection, and appointment-setting reps until the response becomes familiar.","PRACTICE UNDER PRESSURE"],
               ["03","DIAL","Take the skill into a measured call block. Track actions, conversations, and what needs another rep.","TURN PRACTICE INTO PIPELINE"]
-            ].map((x,i)=><article className={`lab-card lab-${i+1}`} key={x[0]}><div className="lab-top"><span>{x[0]}</span><span>+</span></div><h3>{x[1]}</h3><p>{x[2]}</p><small>{x[3]} →</small></article>)}
+            ].map((x,i)=><article className={`lab-card lab-${i+1}`} key={x[0]}><div className="lab-top"><span>{x[0]}</span><span>+</span></div><h3>{x[1]}</h3><p>{x[2]}</p><small>{x[3]} <ArrowIcon dir="right" /></small></article>)}
           </div>
         </div>
       </section>
@@ -58,7 +58,7 @@ export default function Home() {
           <div className="module-list">
             {modules.slice(0,8).map((m,i)=><Link href={i<2?`/courses/${m.slug}`:"/courses"} key={m.id} className="module-row"><span className="module-num">{String(m.id).padStart(2,"0")}</span><h3>{m.title}</h3><p>{m.description}</p><b>{i===0?"IN PROGRESS":i===1?"READY":"LOCKED"}</b><i><ArrowIcon /></i></Link>)}
           </div>
-          <Link className="btn btn-primary all-modules" href="/courses">View all 12 modules →</Link>
+          <Link className="btn btn-primary all-modules" href="/courses">View all 12 modules <ArrowIcon dir="right" /></Link>
         </div>
       </section>
 

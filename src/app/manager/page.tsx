@@ -1,4 +1,5 @@
 "use client";
+import { ArrowIcon } from "@/components/ArrowIcon";
 import { EmailAuthProvider, reauthenticateWithCredential } from "firebase/auth";
 import Link from "next/link";
 import { useCallback, useEffect, useState } from "react";
@@ -68,7 +69,7 @@ function TeamOverview() {
               <span>{formatDuration(totalSeconds(data))}</span>
               <span>{q === null ? "–" : `${q}%`}</span>
               <span style={{ color: "var(--muted)", fontSize: 14 }}>{last ? formatDay(last) : "Not yet"}{st > 1 ? ` · ${st}-day streak` : ""}</span>
-              <span style={{ color: "var(--green)", fontWeight: 800 }}>View →</span>
+              <span style={{ color: "var(--green)", fontWeight: 800 }}>View <ArrowIcon dir="right" /></span>
             </Link>
             <span style={{ textAlign: "right" }}>{p.uid !== me?.uid && <button className="btn btn-outline" style={{ fontSize: 12, minHeight: 36, padding: "0 14px", color: RED }} onClick={() => setRemoving(p)}>Remove</button>}</span>
             </div>;

@@ -1,4 +1,5 @@
 "use client";
+import { ArrowIcon } from "@/components/ArrowIcon";
 import { useEffect, useRef, useState } from "react";
 import { authedPost } from "@/lib/authedFetch";
 import type { Scenario } from "@/data/scenarios";
@@ -138,7 +139,7 @@ export function ModelCall({ scenario, callTime, onExit }: { scenario: Scenario; 
         </p>
         <p style={{ fontSize: 13, color: "var(--muted)", margin: "10px 0 0" }}>This counts as one of today&rsquo;s practice calls.</p>
         <div style={{ display: "flex", justifyContent: "space-between", gap: 12, flexWrap: "wrap", marginTop: 22 }}>
-          <button className="btn btn-outline" onClick={exit}>← Back</button>
+          <button className="btn btn-outline" onClick={exit}><ArrowIcon dir="left" /> Back</button>
           <button className="btn btn-primary" onClick={() => void run()}>▶ Start the model call</button>
         </div>
       </div>
@@ -184,7 +185,7 @@ export function ModelCall({ scenario, callTime, onExit }: { scenario: Scenario; 
             {result ? <span style={{ ...badge, background: RESULT[result].bg, color: RESULT[result].fg, fontSize: 13 }}>{RESULT[result].label}</span> : <span style={{ fontSize: 13, color: "var(--muted)" }}>{error ? "The call stopped." : "Stopped."}</span>}
             <div style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>
               <button className="btn btn-outline" onClick={() => void run()}>Watch again</button>
-              <button className="btn btn-primary" onClick={exit}>Make my own call →</button>
+              <button className="btn btn-primary" onClick={exit}>Make my own call <ArrowIcon dir="right" /></button>
             </div>
           </div>
         )}

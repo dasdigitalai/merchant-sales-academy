@@ -1,4 +1,5 @@
 "use client";
+import { ArrowIcon } from "@/components/ArrowIcon";
 import { BRAND } from "@/lib/brand";
 import { sendPasswordResetEmail, signInWithEmailAndPassword } from "firebase/auth";
 import Link from "next/link";
@@ -56,7 +57,7 @@ export default function SignIn() {
         <label style={{ fontSize: 13, fontWeight: 800 }}>Password<input type="password" required autoComplete="current-password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="••••••••" style={field} /></label>
         {error && <p role="alert" style={{ color: "#a3320b", fontSize: 14, margin: "0 0 14px" }}>{error}</p>}
         {notice && <p role="status" style={{ color: "var(--green)", fontSize: 14, margin: "0 0 14px" }}>{notice}</p>}
-        <button className="btn btn-primary" disabled={busy} style={{ width: "100%", marginTop: 4 }}>{busy ? "Signing in…" : "Sign in →"}</button>
+        <button className="btn btn-primary" disabled={busy} style={{ width: "100%", marginTop: 4 }}>{busy ? "Signing in…" : <>Sign in <ArrowIcon dir="right" /></>}</button>
         <button type="button" onClick={() => void reset()} style={{ display: "block", margin: "16px auto 0", background: "none", border: 0, color: "var(--green)", fontWeight: 800, fontSize: 13, cursor: "pointer" }}>Forgot password?</button>
         <p style={{ textAlign: "center", fontSize: 14, color: "var(--muted)", marginTop: 18 }}>Got an invite? <Link href="/register" style={{ color: "var(--green)", fontWeight: 800 }}>Create your account</Link></p>
       </form>

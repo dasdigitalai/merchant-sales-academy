@@ -1,3 +1,4 @@
+import { ArrowIcon } from "@/components/ArrowIcon";
 import Link from "next/link";
 import { moduleNeighbors } from "@/data/curriculum";
 import { ModuleTimer } from "./Tracking";
@@ -11,7 +12,7 @@ export function ModuleBreadcrumb({ moduleSlug, itemId }: { moduleSlug: string; i
   return (
     <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: 12, flexWrap: "wrap", marginBottom: 22 }}>
       <ModuleTimer moduleSlug={moduleSlug} />
-      <Link href={`/courses/${module.slug}`} style={{ fontSize: 13, fontWeight: 800, color: "var(--green)" }}>← {module.title}</Link>
+      <Link href={`/courses/${module.slug}`} style={{ fontSize: 13, fontWeight: 800, color: "var(--green)" }}><ArrowIcon dir="left" /> {module.title}</Link>
       <span style={{ fontSize: 12, color: "var(--muted)" }}>Module {String(module.id).padStart(2, "0")} · {index + 1} of {total}</span>
     </div>
   );
@@ -23,9 +24,9 @@ export function ModulePager({ moduleSlug, itemId, children }: { moduleSlug: stri
   const small = { fontSize: 11, fontWeight: 900, letterSpacing: ".12em", color: "var(--muted)", textTransform: "uppercase" as const };
   return (
     <nav aria-label="Module navigation" style={{ display: "flex", justifyContent: "space-between", alignItems: "stretch", gap: 14, flexWrap: "wrap", marginTop: 28 }}>
-      <Link href={prev.href} style={cell}><span style={small}>← Previous · {prev.label}</span><b style={{ fontSize: 14, color: "var(--ink)" }}>{prev.title}</b></Link>
+      <Link href={prev.href} style={cell}><span style={small}><ArrowIcon dir="left" /> Previous · {prev.label}</span><b style={{ fontSize: 14, color: "var(--ink)" }}>{prev.title}</b></Link>
       {children}
-      <Link href={next.href} style={{ ...cell, textAlign: "right", marginLeft: "auto" }}><span style={small}>Next · {next.label} →</span><b style={{ fontSize: 14, color: "var(--ink)" }}>{next.title}</b></Link>
+      <Link href={next.href} style={{ ...cell, textAlign: "right", marginLeft: "auto" }}><span style={small}>Next · {next.label} <ArrowIcon dir="right" /></span><b style={{ fontSize: 14, color: "var(--ink)" }}>{next.title}</b></Link>
     </nav>
   );
 }
