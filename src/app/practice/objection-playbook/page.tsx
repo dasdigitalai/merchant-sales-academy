@@ -1,5 +1,4 @@
-import { ArrowIcon } from "@/components/ArrowIcon";
-"use client"; import Link from "next/link"; import { useState } from "react"; import { AppShell } from "@/components/AppShell"; import { authedPost } from "@/lib/authedFetch"; import { ModuleBreadcrumb, ModulePager } from "@/components/ModuleNav"; import { SavedNote, useSaveExercise } from "@/components/Tracking"; import { downloadObjectionPlaybookPdf } from "@/lib/pdf"; import { PreviewGate } from "@/components/PreviewGate"; import { modules } from "@/data/curriculum";
+"use client"; import { ArrowIcon } from "@/components/ArrowIcon"; import Link from "next/link"; import { useState } from "react"; import { AppShell } from "@/components/AppShell"; import { authedPost } from "@/lib/authedFetch"; import { ModuleBreadcrumb, ModulePager } from "@/components/ModuleNav"; import { SavedNote, useSaveExercise } from "@/components/Tracking"; import { downloadObjectionPlaybookPdf } from "@/lib/pdf"; import { PreviewGate } from "@/components/PreviewGate"; import { modules } from "@/data/curriculum";
 // Module 6 exercise: the rep writes what they'll say to the four common objections for one real merchant, gets coach feedback from /api/objection-playbook-feedback, then keeps the playbook as a PDF.
 type StepKey="merchant"|"notInterested"|"happy"|"sendInfo"|"price";
 type Area=Exclude<StepKey,"merchant">;
