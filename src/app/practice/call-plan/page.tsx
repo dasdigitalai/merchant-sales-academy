@@ -1,5 +1,4 @@
-import { ArrowIcon } from "@/components/ArrowIcon";
-"use client"; import Link from "next/link"; import { useState } from "react"; import { AppShell } from "@/components/AppShell"; import { authedPost } from "@/lib/authedFetch"; import { ModuleBreadcrumb, ModulePager } from "@/components/ModuleNav"; import { SavedNote, useSaveExercise } from "@/components/Tracking"; import { downloadCallPlanPdf } from "@/lib/pdf";
+"use client"; import { ArrowIcon } from "@/components/ArrowIcon"; import Link from "next/link"; import { useState } from "react"; import { AppShell } from "@/components/AppShell"; import { authedPost } from "@/lib/authedFetch"; import { ModuleBreadcrumb, ModulePager } from "@/components/ModuleNav"; import { SavedNote, useSaveExercise } from "@/components/Tracking"; import { downloadCallPlanPdf } from "@/lib/pdf";
 // Module 2 exercise: the rep writes tomorrow's call plan in four steps, gets coach feedback on each part from /api/call-plan-feedback, then keeps the plan as a one-page PDF.
 type Area="target"|"blocks"|"routine"|"logging";
 type Section={status:"good"|"fix";feedback:string;suggestion:string};

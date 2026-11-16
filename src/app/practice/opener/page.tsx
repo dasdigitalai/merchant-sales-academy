@@ -1,5 +1,4 @@
-import { ArrowIcon } from "@/components/ArrowIcon";
-"use client"; import Link from "next/link"; import { useState } from "react"; import { AppShell } from "@/components/AppShell"; import { authedPost } from "@/lib/authedFetch"; import { ModuleBreadcrumb, ModulePager } from "@/components/ModuleNav"; import { SavedNote, useSaveExercise } from "@/components/Tracking"; import { downloadOpenerPdf } from "@/lib/pdf";
+"use client"; import { ArrowIcon } from "@/components/ArrowIcon"; import Link from "next/link"; import { useState } from "react"; import { AppShell } from "@/components/AppShell"; import { authedPost } from "@/lib/authedFetch"; import { ModuleBreadcrumb, ModulePager } from "@/components/ModuleNav"; import { SavedNote, useSaveExercise } from "@/components/Tracking"; import { downloadOpenerPdf } from "@/lib/pdf";
 // Module 3 exercise: the rep builds an opener for a real merchant in four steps, gets coach feedback from /api/opener-feedback, then keeps the opener as a PDF.
 type StepKey="merchant"|"reason"|"question"|"opener";
 type Area="intro"|"reason"|"question"|"delivery";
