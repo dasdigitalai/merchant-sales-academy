@@ -38,6 +38,16 @@ button, input, textarea { font: inherit; }
 .btn-primary:hover { background: var(--green); }
 .btn-lime { background: var(--lime); color: var(--ink); }
 .btn-outline { border-color: #bfc8c3; background: transparent; }
+
+/* Gradient arrow (see ArrowIcon). Brand gradient on light backgrounds; on a
+   filled button or a highlighted row it goes dark so it stays readable. */
+.arrow-ico { --arrow-from: var(--green); --arrow-to: var(--orange); display: inline-block; flex: none; width: 1em; height: 1em; vertical-align: -.125em; background: linear-gradient(135deg, var(--arrow-from), var(--arrow-to));
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 18 18 6M8.5 6H18v9.5'/%3E%3C/svg%3E") center / contain no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 18 18 6M8.5 6H18v9.5'/%3E%3C/svg%3E") center / contain no-repeat;
+  transition: transform .15s ease; }
+.btn .arrow-ico, .module-row:hover .arrow-ico { --arrow-from: var(--ink); --arrow-to: var(--green-dark); }
+.btn .arrow-ico { width: 1.25em; height: 1.25em; }
+.btn:hover .arrow-ico, .module-row:hover .arrow-ico { transform: translate(2px, -2px); }
 .progress { height: 8px; overflow: hidden; border-radius: 99px; background: #e7ebe5; }
 .progress > span { display: block; height: 100%; border-radius: inherit; background: var(--green); }
 .dot-grid { background-image: radial-gradient(rgba(10,11,10,.3) 1.4px, transparent 1.4px); background-size: 10px 10px; }

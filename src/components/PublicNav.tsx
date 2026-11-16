@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Logo } from "./Logo";
+import { ArrowIcon } from "./ArrowIcon";
 
 export function PublicNav() {
   return (
@@ -11,7 +12,7 @@ export function PublicNav() {
         </nav>
         <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
           <Link className="desktop-only" href="/signin" style={{ fontSize: 10, letterSpacing: ".1em", textTransform: "uppercase", fontWeight: 900, padding: 12 }}>Sign in</Link>
-          <Link className="btn btn-lime" href="/register">Enter call lab <span>↗</span></Link>
+          <Link className="btn btn-lime" href="/register">Enter call lab <ArrowIcon /></Link>
         </div>
       </div>
     </header>

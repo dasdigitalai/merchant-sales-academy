@@ -4,8 +4,8 @@ import { Logo } from "./Logo";
 import { RequireAuth, useAuth } from "./AuthProvider";
 import { fullName } from "@/lib/db";
 
-const links = [
-  ["▦", "Dashboard", "/dashboard"], ["▶", "Training", "/courses"], ["◎", "Practice", "/practice"], ["☏", "Call simulator", "/practice/roleplay"], ["✓", "Knowledge checks", "/quiz"], ["↗", "My progress", "/progress"],
+const links: [React.ReactNode, string, string][] = [
+  ["▦", "Dashboard", "/dashboard"], ["▶", "Training", "/courses"], ["◎", "Practice", "/practice"], ["☏", "Call simulator", "/practice/roleplay"], ["✓", "Knowledge checks", "/quiz"], [<span key="arrow" className="arrow-ico" style={{ ["--arrow-from" as string]: "var(--lime)", fontSize: 15 }} />, "My progress", "/progress"],
 ];
 
 // Every learner page renders inside this shell, so it's also where sign-in is enforced.

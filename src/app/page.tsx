@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { PublicNav } from "@/components/PublicNav";
+import { ArrowIcon } from "@/components/ArrowIcon";
 import { MiniWaveform } from "@/components/SignalArt";
 import { modules } from "@/data/curriculum";
 import { BRAND } from "@/lib/brand";
@@ -18,7 +19,7 @@ export default function Home() {
             <div className="hero-status"><span /> LIVE TRAINING SYSTEM FOR MERCHANT SALES</div>
             <h1 className="display hero-title">Stop<br/>avoiding<br/><em>the call.</em></h1>
             <p className="hero-lead">Cold-calling confidence is not something you either have or don&apos;t. It is a trainable response built through repetition, pressure, and honest practice.</p>
-            <div className="hero-actions"><Link className="btn btn-lime" href="/register">Enter the call lab <b>↗</b></Link><Link className="text-link" href="#curriculum">See the system ↓</Link></div>
+            <div className="hero-actions"><Link className="btn btn-lime" href="/register">Enter the call lab <ArrowIcon /></Link><Link className="text-link" href="#curriculum">See the system ↓</Link></div>
             <div className="hero-proof"><b>01</b><span>LESSONS THAT<br/>CHANGE BEHAVIOR</span><b>02</b><span>DRILLS THAT FEEL<br/>LIKE REAL CALLS</span><b>03</b><span>NUMBERS THAT<br/>DON&apos;T LIE</span></div>
           </div>
           <div className="hero-visual"><Image src={BRAND.hero.src} alt={BRAND.hero.alt} width={BRAND.hero.width} height={BRAND.hero.height} unoptimized={BRAND.hero.src.endsWith(".svg")} priority style={{ width: "100%", maxWidth: 620, height: "auto", margin: "auto", display: "block", ...(BRAND.hero.src.endsWith(".svg") ? {} : { opacity: 0.88, filter: "brightness(0.88) saturate(0.92)" }) }} /></div>
@@ -55,14 +56,14 @@ export default function Home() {
         <div className="container">
           <div className="curriculum-head"><div><span className="index-stamp">TRAINING SEQUENCE / 012</span><h2 className="display section-title">Built for the<br/>hard part.</h2></div><p>Every module attacks a specific point where outbound momentum breaks down.</p></div>
           <div className="module-list">
-            {modules.slice(0,8).map((m,i)=><Link href={i<2?`/courses/${m.slug}`:"/courses"} key={m.id} className="module-row"><span className="module-num">{String(m.id).padStart(2,"0")}</span><h3>{m.title}</h3><p>{m.description}</p><b>{i===0?"IN PROGRESS":i===1?"READY":"LOCKED"}</b><i>↗</i></Link>)}
+            {modules.slice(0,8).map((m,i)=><Link href={i<2?`/courses/${m.slug}`:"/courses"} key={m.id} className="module-row"><span className="module-num">{String(m.id).padStart(2,"0")}</span><h3>{m.title}</h3><p>{m.description}</p><b>{i===0?"IN PROGRESS":i===1?"READY":"LOCKED"}</b><i><ArrowIcon /></i></Link>)}
           </div>
           <Link className="btn btn-primary all-modules" href="/courses">View all 12 modules →</Link>
         </div>
       </section>
 
       <section id="teams" className="manager-section noise-panel">
-        <div className="container manager-grid"><div><span className="tag">FOR SALES LEADERS</span><h2 className="display">You can&apos;t coach<br/>what you can&apos;t see.</h2></div><div><p>See who is training, where confidence is breaking down, and whether practice is turning into consistent call activity.</p><div className="score-block"><span>TEAM READINESS</span><strong>78</strong><div><i style={{width:"78%"}} /></div></div><Link className="btn btn-lime" href="/manager">Open manager view ↗</Link></div></div>
+        <div className="container manager-grid"><div><span className="tag">FOR SALES LEADERS</span><h2 className="display">You can&apos;t coach<br/>what you can&apos;t see.</h2></div><div><p>See who is training, where confidence is breaking down, and whether practice is turning into consistent call activity.</p><div className="score-block"><span>TEAM READINESS</span><strong>78</strong><div><i style={{width:"78%"}} /></div></div><Link className="btn btn-lime" href="/manager">Open manager view <ArrowIcon /></Link></div></div>
       </section>
     </main>
     <footer className="site-footer"><div className="container"><b>{BRAND.name.toUpperCase()}</b><span>MAKE THE CALL.</span><span>© 2026</span></div></footer>
