@@ -1,4 +1,5 @@
 "use client";
+import { ArrowIcon } from "@/components/ArrowIcon";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { AppShell } from "@/components/AppShell";
@@ -57,7 +58,7 @@ export default function CertificatePage() {
       </section>
       <div style={{ display: "flex", gap: 12, flexWrap: "wrap", justifyContent: "space-between", alignItems: "center", marginTop: 24 }}>
         <button className="btn btn-primary" onClick={download}>Download certificate (PDF)</button>
-        <Link className="btn btn-outline" href="/progress">See my progress →</Link>
+        <Link className="btn btn-outline" href="/progress">See my progress <ArrowIcon dir="right" /></Link>
       </div>
       {pdfError && <p role="alert" style={{ color: "#a3320b", fontSize: 14, marginTop: 14 }}>{pdfError}</p>}
       <p style={{ color: "var(--muted)", fontSize: 14, marginTop: 18 }}>Your manager can see your certification on your progress report. Now go run your 30-day plan.</p>
@@ -74,7 +75,7 @@ export default function CertificatePage() {
           </div>;
         })}
       </section>
-      {next && <Link className="btn btn-primary" style={{ marginTop: 24 }} href={lessonHref(next.module.slug, next.lesson)}>Continue: {next.lesson.title} →</Link>}
+      {next && <Link className="btn btn-primary" style={{ marginTop: 24 }} href={lessonHref(next.module.slug, next.lesson)}>Continue: {next.lesson.title} <ArrowIcon dir="right" /></Link>}
     </>}
   </div></AppShell>;
 }

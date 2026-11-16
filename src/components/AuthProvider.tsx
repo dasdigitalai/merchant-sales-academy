@@ -1,4 +1,5 @@
 "use client";
+import { ArrowIcon } from "@/components/ArrowIcon";
 import { onAuthStateChanged, signOut, type User } from "firebase/auth";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -56,7 +57,7 @@ export function RequireAuth({ role, children }: { role?: Role; children: React.R
 
   if (loading || !user) return <Centered><p style={{ color: "var(--muted)" }}>Loading…</p></Centered>;
   if (!profile) return <Centered><h2 style={{ fontFamily: "Georgia,serif" }}>No access yet.</h2><p style={{ color: "var(--muted)", lineHeight: 1.6 }}>{BRAND.name} is invite-only, and there&apos;s no invite for {user.email}. Ask your manager to invite this email, then sign in again.</p><button className="btn btn-outline" onClick={() => void logOut()}>Sign out</button></Centered>;
-  if (role && profile.role !== role) return <Centered><h2 style={{ fontFamily: "Georgia,serif" }}>Managers only.</h2><p style={{ color: "var(--muted)" }}>This area is for sales managers.</p><Link className="btn btn-primary" href="/dashboard">Go to my dashboard →</Link></Centered>;
+  if (role && profile.role !== role) return <Centered><h2 style={{ fontFamily: "Georgia,serif" }}>Managers only.</h2><p style={{ color: "var(--muted)" }}>This area is for sales managers.</p><Link className="btn btn-primary" href="/dashboard">Go to my dashboard <ArrowIcon dir="right" /></Link></Centered>;
   return <>{children}</>;
 }
 

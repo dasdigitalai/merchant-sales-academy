@@ -1,4 +1,5 @@
 "use client";
+import { ArrowIcon } from "@/components/ArrowIcon";
 import { createUserWithEmailAndPassword, deleteUser } from "firebase/auth";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -57,7 +58,7 @@ export default function Register() {
       <Field label="Work email (the one you were invited with)" type="email" value={form.email} onChange={set("email")} autoComplete="email" placeholder="you@company.com" />
       <Field label="Password" type="password" value={form.password} onChange={set("password")} autoComplete="new-password" placeholder="8+ characters" />
       {error && <p role="alert" style={{ color: "#a3320b", fontSize: 14, margin: "0 0 16px", lineHeight: 1.5 }}>{error}</p>}
-      <button className="btn btn-primary" disabled={busy} style={{ width: "100%" }}>{busy ? "Creating your account…" : "Create account →"}</button>
+      <button className="btn btn-primary" disabled={busy} style={{ width: "100%" }}>{busy ? "Creating your account…" : <>Create account <ArrowIcon dir="right" /></>}</button>
       <p style={{ textAlign: "center", fontSize: 14, color: "var(--muted)", marginTop: 20 }}>Already have an account? <Link href="/signin" style={{ color: "var(--green)", fontWeight: 800 }}>Sign in</Link></p>
     </form>
   </div></div><style>{`@media(max-width:800px){.register-grid{grid-template-columns:1fr!important}}`}</style></div>;

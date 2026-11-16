@@ -1,4 +1,5 @@
 "use client";
+import { ArrowIcon } from "@/components/ArrowIcon";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useAuth } from "./AuthProvider";
@@ -14,6 +15,6 @@ export function ModuleActivities({ moduleSlug }: { moduleSlug: string }) {
   useEffect(() => { if (user) loadLearnerData(user.uid).then((d) => setDone(moduleCompletion(m, d).done)).catch(() => {}); }, [user, m]);
   return <>{m.lessons.map((l, i) => {
     const complete = done.has(l.id);
-    return <Link key={l.id} href={lessonHref(m.slug, l)} style={{ display: "flex", alignItems: "center", gap: 16, padding: "18px 4px", borderTop: "1px solid var(--line)" }}><span style={{ width: 38, height: 38, borderRadius: "50%", display: "grid", placeItems: "center", background: complete ? "var(--green)" : "#edf0e9", color: complete ? "white" : "var(--ink)", fontWeight: 900 }}>{complete ? "✓" : i + 1}</span><div style={{ flex: 1 }}><b style={{ display: "block" }}>{l.title}</b><small style={{ color: "var(--muted)", textTransform: "capitalize" }}>{l.type} · {l.minutes} min</small></div><span>→</span></Link>;
+    return <Link key={l.id} href={lessonHref(m.slug, l)} style={{ display: "flex", alignItems: "center", gap: 16, padding: "18px 4px", borderTop: "1px solid var(--line)" }}><span style={{ width: 38, height: 38, borderRadius: "50%", display: "grid", placeItems: "center", background: complete ? "var(--green)" : "#edf0e9", color: complete ? "white" : "var(--ink)", fontWeight: 900 }}>{complete ? "✓" : i + 1}</span><div style={{ flex: 1 }}><b style={{ display: "block" }}>{l.title}</b><small style={{ color: "var(--muted)", textTransform: "capitalize" }}>{l.type} · {l.minutes} min</small></div><span style={{ fontSize: 16, display: "grid" }}><ArrowIcon /></span></Link>;
   })}</>;
 }

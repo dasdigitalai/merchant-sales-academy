@@ -1,4 +1,5 @@
 "use client";
+import { ArrowIcon } from "@/components/ArrowIcon";
 import Link from "next/link";
 import { Logo } from "./Logo";
 import { RequireAuth, useAuth } from "./AuthProvider";
@@ -31,7 +32,7 @@ export function AppShell({ children, active = "Dashboard" }: { children: React.R
 function ManagerLink() {
   const { profile } = useAuth();
   if (profile?.role !== "manager") return null;
-  return <Link href="/manager" style={{ marginTop: "auto", padding: "14px", borderTop: "1px solid #334c48", color: "#cfdbd7", fontSize: 13 }}>Manager view →</Link>;
+  return <Link href="/manager" style={{ marginTop: "auto", padding: "14px", borderTop: "1px solid #334c48", color: "#cfdbd7", fontSize: 13 }}>Manager view <ArrowIcon dir="right" onDark /></Link>;
 }
 
 function UserBar() {
