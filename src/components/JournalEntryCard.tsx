@@ -1,7 +1,7 @@
 import type { JournalEntry } from "@/lib/db";
 import { modules } from "@/data/curriculum";
 
-// One saved exercise (reflection, call plan, opener, pitch card, discovery plan, objection playbook, booking plan, follow-up plan, consistency plan, front-desk plan, call lab, final scenario, action plan or practice call), shown on My progress
+// One saved exercise (reflection, call plan, opener, pitch card, discovery plan, objection playbook, booking plan, follow-up plan, consistency plan, front-desk plan, call lab, final scenario, action plan, practice call or executive conversation plan), shown on My progress
 // and in the manager's view of a rep.
 
 const s = (v: unknown) => (typeof v === "string" ? v : "");
@@ -137,6 +137,17 @@ export function JournalEntryCard({ entry }: { entry: JournalEntry }) {
         {row("COACH: TRY THIS", s(d.tryInstead))}
         {row("COACH: ONE CHANGE", s(d.oneChange))}
         {row("TRANSCRIPT", s(d.transcript))}
+      </>}
+      {entry.type === "executive-conversation" && <>
+        {row("EXECUTIVE", `${s(d.role)} at ${s(d.company)}`)}
+        {row("1. CONNECT", s(d.connect), true)}
+        {row("2. SITUATION", s(d.situation), true)}
+        {row("3. PROBLEM AWARENESS", s(d.problem), true)}
+        {row("4. SOLUTION AWARENESS", s(d.solution), true)}
+        {row("5. CONSEQUENCE", s(d.consequence), true)}
+        {row("6. COMMITMENT: THE NEXT STEP", s(d.commitment), true)}
+        {row("COACH: IF THEY HESITATE", s(d.safeOut), true)}
+        {row("COACH: ONE CHANGE", s(d.oneChange))}
       </>}
       {entry.type === "action-plan" && <>
         {row("DAILY INPUTS", s(d.inputs))}

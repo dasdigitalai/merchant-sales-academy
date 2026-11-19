@@ -1202,3 +1202,78 @@ export async function downloadCertificatePdf(input: CertificatePdfInput) {
   const stamp = input.certifiedOn.toISOString().slice(0, 10);
   doc.save(`Appointment-Setter Certification - ${clean(input.name).replace(/[\/:*?"<>|]/g, "")} - ${stamp}.pdf`);
 }
+
+export type ExecutiveConversationPdfInput = {
+  role: string;
+  company: string;
+  connect: string;
+  situation: string;
+  problem: string;
+  solution: string;
+  consequence: string;
+  commitment: string;
+  safeOut: string;
+  coachVerdictLabel: string;
+  coachVerdict: "strong" | "close" | "needs_work";
+  oneChange: string;
+  date: Date;
+};
+
+// One executive's conversation plan (Module 13) to take into the meeting.
+export async function downloadExecutiveConversationPdf(input: ExecutiveConversationPdfInput) {
+  const { jsPDF } = await import("jspdf");
+  const doc = new jsPDF({ unit: "pt", format: "letter", orientation: "portrait" });
+  const pageW = doc.internal.pageSize.getWidth();
+  const pageH = doc.internal.pageSize.getHeight();
+  const contentW = pageW - MARGIN * 2;
+  const dateText = input.date.toLocaleDateString(undefined, { year: "numeric", month: "long", day: "numeric" });
+
+  drawHeader(doc, `EXECUTIVE CONVERSATION PLAN  |  ${clean(input.role).toUpperCase()}`, clean(input.company), dateText);
+
+  let y = 150;
+  const ensureRoom = (needed: number) => {
+    if (y + needed > pageH - FOOTER_SPACE) {
+      doc.addPage();
+      y = MARGIN;
+    }
+  };
+  const section = (label: string, text: string, pill = false) => {
+    doc.setFont("times", "normal").setFontSize(13);
+    const lines = doc.splitTextToSize(clean(text), contentW) as string[];
+    ensureRoom(40 + lines.length * 18);
+    doc.setDrawColor(...LINE).setLineWidth(0.75).line(MARGIN, y, pageW - MARGIN, y);
+    y += 22;
+    doc.setFont("helvetica", "bold").setFontSize(8.5).setTextColor(...MUTED);
+    doc.text(label, MARGIN, y, { charSpace: 1.2 });
+    if (pill) drawPill(doc, input.coachVerdictLabel, input.coachVerdict, MARGIN + doc.getTextWidth(label) + label.length * 1.2 + 10, y);
+    y += 20;
+    doc.setFont("times", "normal").setFontSize(13).setTextColor(...INK);
+    doc.text(lines, MARGIN, y, { lineHeightFactor: 1.35 });
+    y += lines.length * 18 + 12;
+  };
+
+  section("1. CONNECT", input.connect, true);
+  section("2. SITUATION", input.situation);
+  section("3. PROBLEM AWARENESS", input.problem);
+  section("4. SOLUTION AWARENESS", input.solution);
+  section("5. CONSEQUENCE", input.consequence);
+  section("6. COMMITMENT: THE NEXT STEP", input.commitment);
+  section("IF THEY HESITATE", input.safeOut);
+
+  // Before-you-meet callout
+  doc.setFont("helvetica", "normal").setFontSize(11.5);
+  const changeLines = doc.splitTextToSize(clean(input.oneChange), contentW - 44) as string[];
+  const boxH = 52 + changeLines.length * 16;
+  ensureRoom(boxH + 10);
+  y += 4;
+  doc.setFillColor(...TINT).rect(MARGIN, y, contentW, boxH, "F");
+  doc.setFillColor(...LIME).rect(MARGIN, y, 5, boxH, "F");
+  doc.setFont("helvetica", "bold").setFontSize(8.5).setTextColor(...GREEN);
+  doc.text("BEFORE YOU MEET", MARGIN + 24, y + 24, { charSpace: 1.2 });
+  doc.setFont("helvetica", "normal").setFontSize(11.5).setTextColor(...INK);
+  doc.text(changeLines, MARGIN + 24, y + 44, { lineHeightFactor: 1.35 });
+
+  drawFooters(doc, input.date);
+  const stamp = input.date.toISOString().slice(0, 10);
+  doc.save(`Executive Conversation Plan - ${clean(input.company).replace(/[\/:*?"<>|]/g, "")} - ${stamp}.pdf`);
+}

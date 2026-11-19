@@ -1,3 +1,5 @@
+import { BRAND, type BrandId } from "@/lib/brand";
+
 export type Lesson = { id: string; title: string; minutes: number; type: "lesson" | "exercise" | "quiz"; href?: string };
 
 // Where a module item lives. Exercises and quizzes have their own routes
@@ -11,7 +13,7 @@ export type NavLink = { href: string; label: string; title: string };
 // Previous/next for any item in a module (lesson, exercise or quiz), so every
 // page in a module navigates the same way. The last item points to the next
 // module's first item, or back to the catalog if that module isn't written yet.
-// The very last item (Module 12's action plan) points to the certificate.
+// The last item of the certification module (Module 12's action plan) points to the certificate.
 export function moduleNeighbors(moduleSlug: string, itemId: string) {
   const mIdx = modules.findIndex((m) => m.slug === moduleSlug);
   const module = modules[mIdx];
@@ -28,19 +30,29 @@ export function moduleNeighbors(moduleSlug: string, itemId: string) {
     next = link(nextItem);
   } else {
     const nextModule = modules[mIdx + 1];
-    next = nextModule && nextModule.lessons.length && nextModule.status !== "preview"
-      ? { href: lessonHref(nextModule.slug, nextModule.lessons[0]), label: `Module ${nextModule.id}`, title: nextModule.title }
-      : !nextModule && module.slug === "certification"
-        ? { href: "/certificate", label: "Certification", title: "Your certificate" }
+    // The certification module always ends at the certificate, even when an
+    // advanced module follows it (those are optional and sit outside it).
+    next = module.slug === "certification"
+      ? { href: "/certificate", label: "Certification", title: "Your certificate" }
+      : nextModule && nextModule.lessons.length && nextModule.status !== "preview"
+        ? { href: lessonHref(nextModule.slug, nextModule.lessons[0]), label: `Module ${nextModule.id}`, title: nextModule.title }
         : { href: "/courses", label: "All modules", title: "Back to the catalog" };
   }
   return { module, index, total: module.lessons.length, prev, next };
 }
-export type Module = { id: number; slug: string; title: string; description: string; lessons: Lesson[]; status: "active" | "locked" | "available" | "preview" };
+export type Module = {
+  id: number; slug: string; title: string; description: string; lessons: Lesson[]; status: "active" | "locked" | "available" | "preview";
+  // "advanced": builds on the core path but sits outside the Appointment-Setter
+  // Certification, so it never blocks (or un-does) anyone's certificate.
+  track?: "advanced";
+  // Only these brands get the module; leave unset for every brand. Set it for
+  // content that belongs to one company (see lib/brand.ts).
+  brands?: BrandId[];
+};
 // "preview": written but not released. Only managers can open it (see PreviewGate),
 // and it doesn't count toward reps' completion until it's switched to "available".
 
-export const modules: Module[] = [
+const allModules: Module[] = [
   { id: 1, slug: "understanding-call-reluctance", title: "Understanding Call Reluctance", description: "Recognize what is holding you back and learn how to separate personal rejection from a business outcome.", status: "available", lessons: [
     { id: "why-we-hesitate", title: "Why We Hesitate", minutes: 2, type: "lesson" },
     { id: "fear-of-rejection", title: "Fear of Rejection", minutes: 2, type: "lesson" },
@@ -137,4 +149,20 @@ export const modules: Module[] = [
     { id: "knowledge-check", title: "Final Exam", minutes: 10, type: "quiz", href: "/quiz/certification" },
     { id: "action-plan", title: "Your 30-Day Action Plan", minutes: 10, type: "exercise", href: "/practice/action-plan" },
   ] },
+  { id: 13, slug: "executive-selling-nepq", title: "Consultative Selling to Executives (NEPQ)", description: "Run a low-pressure, question-led conversation with a CEO, CFO or COO: connect, uncover the problem, let them price doing nothing, and earn a next step.", status: "preview", track: "advanced", brands: ["kadima"], lessons: [
+    { id: "nepq-roadmap", title: "Selling to the Executive’s World", minutes: 3, type: "lesson" },
+    { id: "connect-and-situation", title: "Connect, Then Map the Current State", minutes: 4, type: "lesson" },
+    { id: "problem-awareness", title: "Let Them Name the Problem", minutes: 4, type: "lesson" },
+    { id: "solution-awareness", title: "Let Them Picture the Fix", minutes: 3, type: "lesson" },
+    { id: "consequence-questions", title: "Let Them Price Doing Nothing", minutes: 3, type: "lesson" },
+    { id: "commitment-and-closing", title: "Ask for the Next Step, Not the Moon", minutes: 4, type: "lesson" },
+    { id: "trusted-advisor", title: "Be the Trusted Advisor", minutes: 3, type: "lesson" },
+    { id: "differentiate", title: "Don’t Be a Commodity", minutes: 3, type: "lesson" },
+    { id: "executive-objections", title: "Executive Objections: Contracts, “It Works,” and “Send Info”", minutes: 4, type: "lesson" },
+    { id: "executive-conversation", title: "Plan Your Executive Conversation", minutes: 12, type: "exercise", href: "/practice/executive-conversation" },
+    { id: "knowledge-check", title: "Module Knowledge Check", minutes: 6, type: "quiz", href: "/quiz/executive-selling-nepq" },
+  ] },
 ];
+
+// The modules this deployment offers (some belong to one brand only).
+export const modules: Module[] = allModules.filter((m) => !m.brands || m.brands.includes(BRAND.id));
