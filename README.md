@@ -21,7 +21,7 @@ A commercial cold-calling training platform for merchant-services salespeople. T
 - `/practice` — guided practice exercise
 - `/quiz` — knowledge-check interface
 - `/progress` — learner progress
-- `/courses/executive-selling-nepq` — Module 13, Consultative Selling to Executives (NEPQ): Kadima brand only, an advanced track outside the certification, currently `status: "preview"` (managers only)
+- `/courses/executive-selling-nepq` — Module 13, Consultative Selling to Executives (NEPQ): Kadima brand only, an advanced track outside the certification, `status: "available"`
 - `/manager` — team manager dashboard
 
 ## Local development
@@ -52,4 +52,4 @@ Adapted from the Kadima NEPQ Sales Playbook for Credit Card Processing Services 
 - **Where things live:** the module is in `src/data/curriculum.ts` (id 13), its nine lessons in `src/data/executive-lessons.tsx`, its knowledge check in `src/data/quiz.ts` (`module13Quiz`), its exercise at `src/app/practice/executive-conversation` with coach feedback from `src/app/api/executive-conversation-feedback`.
 - **Brand:** `brands: ["kadima"]`, so only `NEXT_PUBLIC_BRAND=kadima` deployments have it. Remove that field to offer it everywhere.
 - **Certification:** `track: "advanced"` keeps it out of the Appointment-Setter Certification, so it never blocks or un-does anyone's certificate.
-- **Releasing it:** it is `status: "preview"` (managers only). When it's ready for reps, change it to `"available"`. Reps' overall completion counts it from then on.
+- **Status:** released (`status: "available"`), so reps see it and their overall completion counts it. To pull it back to managers only, set it to `"preview"`.

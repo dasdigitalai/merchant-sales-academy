@@ -149,7 +149,7 @@ const allModules: Module[] = [
     { id: "knowledge-check", title: "Final Exam", minutes: 10, type: "quiz", href: "/quiz/certification" },
     { id: "action-plan", title: "Your 30-Day Action Plan", minutes: 10, type: "exercise", href: "/practice/action-plan" },
   ] },
-  { id: 13, slug: "executive-selling-nepq", title: "Consultative Selling to Executives (NEPQ)", description: "Run a low-pressure, question-led conversation with a CEO, CFO or COO: connect, uncover the problem, let them price doing nothing, and earn a next step.", status: "preview", track: "advanced", brands: ["kadima"], lessons: [
+  { id: 13, slug: "executive-selling-nepq", title: "Consultative Selling to Executives (NEPQ)", description: "Run a low-pressure, question-led conversation with a CEO, CFO or COO: connect, uncover the problem, let them price doing nothing, and earn a next step.", status: "available", track: "advanced", brands: ["kadima"], lessons: [
     { id: "nepq-roadmap", title: "Selling to the Executive’s World", minutes: 3, type: "lesson" },
     { id: "connect-and-situation", title: "Connect, Then Map the Current State", minutes: 4, type: "lesson" },
     { id: "problem-awareness", title: "Let Them Name the Problem", minutes: 4, type: "lesson" },
