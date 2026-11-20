@@ -180,6 +180,12 @@ export const executiveLessons: Record<string, LessonContent> = {
     title: "Let Them Price Doing Nothing",
     lead: "After the picture of a better future, a gentle reality check: what does the status quo cost? The goal is to help them conclude that doing nothing is not an option.",
     body: <>
+      <h2>The lesson at a glance</h2>
+      <Figure
+        src="/lesson-consequence-questions-glance.webp"
+        alt="Infographic titled Let Them Price Doing Nothing. The cost of inaction: consequence questions help the executive think through what happens if the problems they described continue, creating urgency and letting them build the business case for change themselves. Why it works: people are often more motivated to avoid a loss than to win a gain, and it turns today’s issues into tomorrow’s real cost, risk or missed opportunity. Four techniques: focus on loss or risk, tie it to what they said, let them quantify it, and use conditional language. Four example consequence questions about chargebacks, security vulnerabilities, slow settlements, and staying with the current processor. A banner at the bottom reads Then stop talking: ask the question, let them respond and fully process it, then acknowledge what they say."
+        caption="Consequence questions at a glance. Tap the image to enlarge it."
+      />
       <h2>The cost of inaction</h2>
       <p>People are often more motivated to avoid a loss than to win a gain. Consequence questions use that, without pressure, by asking the executive to think through what happens if the problems they described continue. Done well, the question creates a slight discomfort, and the executive builds the business case for change themselves.</p>
       <h2>Four techniques</h2>
@@ -206,6 +212,12 @@ export const executiveLessons: Record<string, LessonContent> = {
     title: "Ask for the Next Step, Not the Moon",
     lead: "With executives, the close is usually a series of small, agreed steps. Each one is a micro-commitment, and each one makes the next feel natural.",
     body: <>
+      <h2>The lesson at a glance</h2>
+      <Figure
+        src="/lesson-commitment-and-closing-glance.webp"
+        alt="Infographic titled Ask for the Next Step, Not the Moon. The goal: check readiness and secure agreement to proceed without high-pressure tactics. Key mindset: keep it a conversation, focus on the next step and not a final commitment, and be prepared for a not yet while keeping the door open. Four commitment moves: soft close with validation, gauge commitment on a scale of 1 to 10, ask for the next step, and assume and ask. More closing moves: summarize value first, offer an alternate choice, talk logistics as if it is decided, ask what is stopping you, be OK with no, and close a next step. A banner at the bottom reads Always be advancing: if you aren’t closing the sale, close some form of commitment."
+        caption="Commitment and closing at a glance. Tap the image to enlarge it."
+      />
       <h2>Commitment questions</h2>
       <p>Commitment questions check readiness and secure agreement to proceed without high-pressure tactics. If the conversation has gone well, the executive already believes in the need and sees value in your solution. Your job is to help them say it and act on it.</p>
       <ul>
@@ -235,6 +247,12 @@ export const executiveLessons: Record<string, LessonContent> = {
     title: "Be the Trusted Advisor",
     lead: "Following the question sequence isn’t enough on its own. With a CEO, CFO or COO, you win by establishing credibility and trust, which come from integrity and capability together.",
     body: <>
+      <h2>The lesson at a glance</h2>
+      <Figure
+        src="/lesson-trusted-advisor-glance.webp"
+        alt="Infographic titled Be the Trusted Advisor. The goal: build credibility and trust so the executive sees you as a partner who understands their business. The result: stronger relationships with executive teams, more productive conversations, greater confidence in your recommendations, and long-term partnerships and referrals. Seven advisor habits: do your homework, lead with insight, act like part of their team, show integrity and reliability, use success stories, speak in ROI, and be confident but consultative. What it looks like in action: five example lines an advisor might say. A banner at the bottom reads The big takeaway: credibility with executives is trust plus capability."
+        caption="Trusted advisor habits at a glance. Tap the image to enlarge it. The figures in the example lines are illustrations: only quote results you can verify."
+      />
       <h2>Seven habits</h2>
       <ul>
         <li><b>Do your homework.</b> Research the executive and the company before any meeting. Know their industry, recent news and strategic goals, and use their language.</li>
@@ -255,6 +273,12 @@ export const executiveLessons: Record<string, LessonContent> = {
     title: "Don’t Be a Commodity",
     lead: "Many executives think “a processor is a processor.” They’ve been pitched by plenty of reps leading with the lowest rate. Your job is to be the exception.",
     body: <>
+      <h2>The lesson at a glance</h2>
+      <Figure
+        src="/lesson-differentiate-glance.webp"
+        alt="Infographic titled Don’t Be a Commodity. The goal: shift the conversation from price to value. Why it works: it escapes the race to the lowest rate, focuses on what executives value most, and builds long-term trust. Turn features into business value: faster settlement, fraud and PCI support, ERP and accounting integration, and dedicated support, each tied to a benefit. Other ways to stand out: make your process the differentiator, offer insight through a statement review, stress flexibility, and position against competitors politely. A banner at the bottom reads The key takeaway: sell value and expertise, not price."
+        caption="Differentiation at a glance. Tap the image to enlarge it. Use these benefits only where they are true for Kadima and for the merchant."
+      />
       <h2>Sell value and expertise, not price</h2>
       <p>Competing on “the lowest rates” is a race to the bottom, and it feeds the commodity mindset. Instead, emphasize cost transparency, better technology, superior service and tailored solutions. It lines up with what you learned in Module 6: don’t compete on a number you haven’t earned the right to quote. A line that works with executives:</p>
       <Say>“We provide a detailed analysis so you can see what you’re paying and why, and we put every fee in writing with full transparency.”</Say>
