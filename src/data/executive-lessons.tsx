@@ -37,6 +37,12 @@ export const executiveLessons: Record<string, LessonContent> = {
     title: "Selling to the Executive’s World",
     lead: "A CEO, CFO or COO doesn’t want a product pitch. They want to know whether you understand their business well enough to help with it.",
     body: <>
+      <h2>The lesson at a glance</h2>
+      <Figure
+        src="/lesson-nepq-roadmap-summary.webp"
+        alt="Infographic titled Selling to the Executive’s World. NEPQ, Neuro-Emotional Persuasion Questioning, is a sequence of questions that moves an executive from connecting with you to committing to a next step, without a pitch in the middle. The six stages are Connecting, Situation, Problem awareness, Solution awareness, Consequence and Commitment. A banner at the bottom reads Open with insight, not a pitch, with a sample opener for a retail CFO."
+        caption="The six NEPQ stages in order. Tap the image to enlarge it. Use the sample opener only if it’s true for you."
+      />
       <h2>A conversation about their world</h2>
       <p>Modules 3 to 7 taught you to earn a first conversation and turn it into an appointment. This module is about what happens when an executive is on the other side of the table. The approach is consultative and low-pressure: you ask questions that help them see their own needs, and then see whether your service is a fit.</p>
       <p>That approach is called NEPQ, Neuro-Emotional Persuasion Questioning. It is a sequence of questions that moves an executive from connecting with you to committing to a next step, without a pitch in the middle.</p>
@@ -56,12 +62,6 @@ export const executiveLessons: Record<string, LessonContent> = {
       <Say>“I work with a lot of retail CFOs, and I often hear frustration about rising interchange fees and surprise chargeback costs. I’m curious, how are you managing that at [Company]?”</Say>
       <p>That opener shows industry knowledge, names a familiar pain, and leads straight into the first Connecting question. But it only works if it’s true. If you haven’t spoken to many retail CFOs, say what you can stand behind: “Retail finance teams often tell me…”</p>
       <p>Whatever the stage, keep your tone calm and unhurried. Executives expect a peer, not a salesperson. Position yourself as a knowledgeable advisor, and listen more than you talk.</p>
-      <h2>The lesson at a glance</h2>
-      <Figure
-        src="/lesson-nepq-roadmap-summary.webp"
-        alt="Infographic titled Selling to the Executive’s World. NEPQ, Neuro-Emotional Persuasion Questioning, is a sequence of questions that moves an executive from connecting with you to committing to a next step, without a pitch in the middle. The six stages are Connecting, Situation, Problem awareness, Solution awareness, Consequence and Commitment. A banner at the bottom reads Open with insight, not a pitch, with a sample opener for a retail CFO."
-        caption="The six NEPQ stages in order. Tap the image to enlarge it. Use the sample opener only if it’s true for you."
-      />
     </>,
   },
 
