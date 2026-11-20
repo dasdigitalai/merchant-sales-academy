@@ -1,3 +1,4 @@
+import Image from "next/image";
 import type { ReactNode } from "react";
 
 // Module 13, "Consultative Selling to Executives (NEPQ)": lesson content.
@@ -16,6 +17,17 @@ export type LessonContent = { kicker: string; title: string; lead: string; body:
 
 // A line the rep could say out loud.
 const Say = ({ children }: { children: ReactNode }) => <div className="say">{children}</div>;
+
+// A full-width illustration inside a lesson body (same look as the lesson page's own LessonFigure).
+const Figure = ({ src, alt, caption }: { src: string; alt: string; caption?: string }) => (
+  <figure className="lesson-figure">
+    {/* Opens full size in a new tab, so small text stays readable on a phone. */}
+    <a href={src} target="_blank" rel="noopener noreferrer">
+      <Image src={src} alt={alt} width={1672} height={941} sizes="(max-width: 900px) 100vw, 760px" style={{ width: "100%", height: "auto", borderRadius: 12, boxShadow: "0 10px 30px rgba(10,11,10,.15)" }} />
+    </a>
+    {caption && <figcaption>{caption}</figcaption>}
+  </figure>
+);
 
 const TOTAL = 9;
 
@@ -44,6 +56,12 @@ export const executiveLessons: Record<string, LessonContent> = {
       <Say>“I work with a lot of retail CFOs, and I often hear frustration about rising interchange fees and surprise chargeback costs. I’m curious, how are you managing that at [Company]?”</Say>
       <p>That opener shows industry knowledge, names a familiar pain, and leads straight into the first Connecting question. But it only works if it’s true. If you haven’t spoken to many retail CFOs, say what you can stand behind: “Retail finance teams often tell me…”</p>
       <p>Whatever the stage, keep your tone calm and unhurried. Executives expect a peer, not a salesperson. Position yourself as a knowledgeable advisor, and listen more than you talk.</p>
+      <h2>The lesson at a glance</h2>
+      <Figure
+        src="/lesson-nepq-roadmap-summary.webp"
+        alt="Infographic titled Selling to the Executive’s World. NEPQ, Neuro-Emotional Persuasion Questioning, is a sequence of questions that moves an executive from connecting with you to committing to a next step, without a pitch in the middle. The six stages are Connecting, Situation, Problem awareness, Solution awareness, Consequence and Commitment. A banner at the bottom reads Open with insight, not a pitch, with a sample opener for a retail CFO."
+        caption="The six NEPQ stages in order. Tap the image to enlarge it. Use the sample opener only if it’s true for you."
+      />
     </>,
   },
 
