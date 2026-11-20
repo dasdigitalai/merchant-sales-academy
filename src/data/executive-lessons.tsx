@@ -39,7 +39,7 @@ export const executiveLessons: Record<string, LessonContent> = {
     body: <>
       <h2>The lesson at a glance</h2>
       <Figure
-        src="/lesson-nepq-roadmap-summary.webp"
+        src="/lesson-nepq-roadmap-glance.webp"
         alt="Infographic titled Selling to the Executive’s World. NEPQ, Neuro-Emotional Persuasion Questioning, is a sequence of questions that moves an executive from connecting with you to committing to a next step, without a pitch in the middle. The six stages are Connecting, Situation, Problem awareness, Solution awareness, Consequence and Commitment. A banner at the bottom reads Open with insight, not a pitch, with a sample opener for a retail CFO."
         caption="The six NEPQ stages in order. Tap the image to enlarge it. Use the sample opener only if it’s true for you."
       />
@@ -106,6 +106,12 @@ export const executiveLessons: Record<string, LessonContent> = {
     title: "Let Them Name the Problem",
     lead: "If the executive describes the frustration, it’s theirs. If you describe it for them, you’re nagging.",
     body: <>
+      <h2>The lesson at a glance</h2>
+      <Figure
+        src="/lesson-problem-awareness-glance.webp"
+        alt="Infographic titled Let Them Name the Problem. The goal: help the executive notice issues, frustrations and unmet needs in their payments setup, by asking, not telling. Three habits that work: ask how they feel, follow up on what they told you, and raise common industry pain points. Six places pain tends to live: fees and rates, chargebacks and fraud, security and compliance, reliability, customer experience, and support, each with a sample question. Questions that draw out more include asking if they are satisfied with their fees, what happens when a chargeback occurs, and how confident they are in their security on a scale of 1 to 10, followed by Why not a 10 if the answer is lower, and the magic wand question. A banner at the bottom reads Listen for emotional cues: if their tone sharpens, acknowledge it and dig gently."
+        caption="Problem awareness at a glance. Tap the image to enlarge it."
+      />
       <h2>Find the gap between now and ideal</h2>
       <p>Problem awareness questions help an executive notice issues, frustrations and unmet needs in their payments setup. You don’t tell them what is wrong. You ask questions that let them say it. Three habits do most of the work:</p>
       <ul>
@@ -142,6 +148,12 @@ export const executiveLessons: Record<string, LessonContent> = {
     title: "Let Them Picture the Fix",
     lead: "Once the problems are out in the open, shift to the future. Ask what they want, and let them describe the solution before you describe yours.",
     body: <>
+      <h2>The lesson at a glance</h2>
+      <Figure
+        src="/lesson-solution-awareness-glance.webp"
+        alt="Infographic titled Let Them Picture the Fix. The goal: help the executive describe their ideal outcome so they become invested in the idea of change. Why it works: they define the value in their own words, it builds emotional buy-in for change, and it shows you what matters most so your solution is relevant. Four techniques to use: explore desired outcomes, ask about past attempts, plant your strengths indirectly, and let them own the idea. Questions that draw out the vision include what eliminating chargeback hassles would do for operations, what they would want from a payments provider on security, what a perfectly running payment process a year from now looks like, and how a meaningful reduction in processing fees would affect their bottom line. A banner at the bottom reads Don’t jump into the pitch: reflect back what they want and confirm you got it right."
+        caption="Solution awareness at a glance. Tap the image to enlarge it."
+      />
       <h2>They sell themselves</h2>
       <p>Solution awareness questions turn the conversation toward results. Instead of pitching, you ask what an ideal setup looks like. As they describe it, they become emotionally invested in the idea of change, and they are the one steering it.</p>
       <h2>Four techniques</h2>
