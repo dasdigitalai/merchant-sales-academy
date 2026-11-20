@@ -308,6 +308,12 @@ export const executiveLessons: Record<string, LessonContent> = {
     title: "Executive Objections: Contracts, “It Works,” and “Send Info”",
     lead: "Executives raise real concerns and knee-jerk brush-offs alike. Welcome them. An objection is a chance to clarify, and the NEPQ rule applies: acknowledge, empathize, then ask.",
     body: <>
+      <h2>The lesson at a glance</h2>
+      <Figure
+        src="/lesson-executive-objections-glance.webp"
+        alt="Infographic titled Executive Objections: Contracts, It Works, and Send Info. The goal: turn objections into progress by clarifying concerns, exploring options and keeping the conversation moving forward. The mindset: stay calm and respectful, acknowledge and empathize first, ask questions to uncover the real concern, and use real client examples when relevant. Three objections, each with why they say it and how to respond. We’re already locked into a processor: acknowledge, run a cost-benefit with their real numbers, position for the future, and suggest a partial solution. We don’t want to change something that works: explore, offer a no-risk assessment, address disruption, and find any dissatisfaction. Just send me more info: clarify their interest, offer a brief follow-up call, ask one more question now, and send it as a problem and solution. A banner at the bottom reads The key takeaway: handle objections with empathy, insight and curiosity."
+        caption="Executive objections at a glance. Tap the image to enlarge it. Describe a transition plan or process only as Kadima really offers it."
+      />
       <p>Good questioning prevents many objections before they come up. For the rest, stay calm, and use a third-party story when it helps: “I had another client who felt the same way. They were hesitant because things were ‘working.’ We discovered…” Only tell a story that really happened.</p>
       <h2>“We’re already locked into a processor.”</h2>
       <p><b>Why they say it:</b> Switching costs and cancellation penalties are real, and “we have a contract” ends the conversation quickly. Acknowledge it first: “I understand. You’ve signed with a processor and you’re obligated for now.” Then reframe:</p>
