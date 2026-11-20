@@ -70,6 +70,12 @@ export const executiveLessons: Record<string, LessonContent> = {
     title: "Connect, Then Map the Current State",
     lead: "Executives open up to someone who is curious about them. Start with their world, then ask just enough about their setup to see where the gaps might be.",
     body: <>
+      <h2>The lesson at a glance</h2>
+      <Figure
+        src="/lesson-connect-and-situation-glance.webp"
+        alt="Infographic titled Connect, Then Map the Current State. The goal: build rapport and learn how the executive is set up today, so you can identify potential gaps and the best next question. Key takeaway: lead with curiosity and not your product, ask a few focused high-value questions, get the facts, the numbers and their perspective, and let their answers decide which problem questions to ask next. Connecting: start with them, not your product. Three habits: personalize, ask open-ended questions, and keep the pace easy. Three openers to keep in your pocket ask what prompted the discussion, what is working well with the current payment setup, and how recent changes at the company affect payment needs. Situation: learn the baseline. Three rules: be selective, cover key areas (fees, contract terms, technology and integration, service and support, risk and security, performance), and quantify. Five key situation questions cover the current provider, monthly volume and effective rate, settlement speed, ERP or billing integration, and what they like about their current processor. A banner at the bottom reads Listen for the way in: use what they say to choose your next question."
+        caption="Connecting and Situation at a glance. Tap the image to enlarge it."
+      />
       <h2>Connecting: start with them, not your product</h2>
       <p>Connecting questions lower a prospect’s guard. Your product doesn’t come up at this stage. You are showing genuine interest in their role, their goals and what has recently changed for the business. Three habits make it work:</p>
       <ul>
