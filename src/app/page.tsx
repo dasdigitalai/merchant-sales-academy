@@ -58,7 +58,7 @@ export default function Home() {
           <div className="module-list">
             {modules.slice(0,8).map((m,i)=><Link href={i<2?`/courses/${m.slug}`:"/courses"} key={m.id} className="module-row"><span className="module-num">{String(m.id).padStart(2,"0")}</span><h3>{m.title}</h3><p>{m.description}</p><b>{i===0?"IN PROGRESS":i===1?"READY":"LOCKED"}</b><i><ArrowIcon /></i></Link>)}
           </div>
-          <Link className="btn btn-primary all-modules" href="/courses">View all 12 modules <ArrowIcon dir="right" /></Link>
+          <Link className="btn btn-primary all-modules" href="/courses">View all {modules.filter(m=>m.status!=="preview").length} modules <ArrowIcon dir="right" /></Link>
         </div>
       </section>
 

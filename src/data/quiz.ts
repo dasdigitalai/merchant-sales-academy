@@ -969,6 +969,108 @@ export const finalExam: QuizQuestion[] = [
   },
 ];
 
+// Module 13 (advanced, Kadima): consultative selling to executives with NEPQ.
+export const module13Quiz: QuizQuestion[] = [
+  {
+    prompt:
+      "You have twenty minutes with the CFO of a regional retail chain, and your opener went well. You're moving into the Situation stage. Which approach fits the NEPQ method?",
+    choices: [
+      "Work through a full checklist of fifteen to twenty detailed questions so you leave no gaps for the proposal.",
+      "Ask a few of the most useful questions (current provider, monthly volume and effective rate, funding speed, how it connects to their accounting software), take notes, and let their answers choose your follow-ups.",
+      "Skip it. Executives are short on time, so go straight to what Kadima offers and watch their reaction.",
+      "Open with the rate they pay and offer to beat it, since price is what executives care about most.",
+    ],
+    answer: 1,
+    explanation:
+      "Situation questions should be systematic but selective: a few strong ones, with numbers where possible, covering the areas where pain tends to hide. A long checklist feels like an interrogation, skipping discovery means you have nothing to build on, and leading with price pulls you straight into the commodity conversation.",
+    lesson: { id: "connect-and-situation", title: "Connect, Then Map the Current State" },
+  },
+  {
+    prompt:
+      "A COO tells you settlements from their current processor usually take two to three days. You want to find out whether that's a real problem for them. What's the best next question?",
+    choices: [
+      "\"You mentioned funds take two to three days. Has that caused any cash-flow issues or frustration for your finance team?\"",
+      "\"Two to three days is slow. We can get you funded the next morning, so that's an easy fix.\"",
+      "\"Most processors are that slow, so it probably isn't worth worrying about.\"",
+      "\"Would you like me to send you a comparison of funding times?\"",
+    ],
+    answer: 0,
+    explanation:
+      "Problem awareness works when the executive describes the pain, so you connect a fact they gave you to a possible frustration and ask. Telling them it's slow and promising next-morning funding is a pitch, and it's a claim you haven't confirmed for this merchant. Dismissing it or sending a comparison ends the conversation instead of deepening it.",
+    lesson: { id: "problem-awareness", title: "Let Them Name the Problem" },
+  },
+  {
+    prompt:
+      "A CEO says: \"I wish cash from sales hit our account faster, and I'd love to stop being surprised by fees.\" They sound interested and ask, \"Can you actually do that?\" What's the best move?",
+    choices: [
+      "Start the full feature walkthrough. They've handed you the opening, so use it.",
+      "Ask for the signature while their enthusiasm is high.",
+      "Say you can reduce their fees by around 20 percent, to show you mean business.",
+      "Reflect it back and check it: \"It sounds like faster cash flow and fee transparency are top priorities. Did I get that right?\" Then talk about how Kadima can help with those two things.",
+    ],
+    answer: 3,
+    explanation:
+      "\"Can you actually do that?\" is a buying signal, and it's also the moment to slow down. Playing their vision back confirms you understood, and it tells you which points to cover. A full pitch is too early, asking for the signature skips the stages that make it feel natural, and a savings percentage you can't guarantee breaks the academy's rule against promising savings.",
+    lesson: { id: "solution-awareness", title: "Let Them Picture the Fix" },
+  },
+  {
+    prompt:
+      "A CFO has told you their processing fees seem to creep up every quarter. You want them to feel the cost of doing nothing, without pressure. Which question fits?",
+    choices: [
+      "\"Companies that wait usually lose tens of thousands of dollars. Don't you want to stop that?\"",
+      "\"Our current pricing ends Friday. How soon can you decide?\"",
+      "\"If those fees keep rising every quarter, how would that affect your operating margins over the next year?\"",
+      "\"Isn't it irresponsible to stay with a processor that's overcharging you?\"",
+    ],
+    answer: 2,
+    explanation:
+      "A consequence question is tied to what they said, uses conditional language, and lets them supply the numbers. Quoting a scary figure you made up, inventing a deadline, or accusing their processor of overcharging (you haven't seen a statement) are all pressure, and an executive will notice.",
+    lesson: { id: "consequence-questions", title: "Let Them Price Doing Nothing" },
+  },
+  {
+    prompt:
+      "You asked a CEO, \"Do you feel like this solution could be the answer for you?\" They said, \"Yes, I think so.\" What do you say next?",
+    choices: [
+      "\"Great. I'll send the agreement over today.\"",
+      "\"Why do you feel that way?\" Then listen, and move to a concrete next step.",
+      "\"Wonderful. Let me walk you through our pricing tiers.\"",
+      "\"Good. Let me send some case studies to make sure.\"",
+    ],
+    answer: 1,
+    explanation:
+      "The two-step soft close asks whether it fits, then asks why. When they explain it in their own words, they reinforce their own conviction, and it's usually a short step from there to \"What would be the next steps on your end?\" Jumping to paperwork, pricing or more reading either rushes them or lets the momentum drain.",
+    lesson: { id: "commitment-and-closing", title: "Ask for the Next Step, Not the Moon" },
+  },
+  {
+    prompt:
+      "A CFO says: \"We just signed with our processor. We're locked in for another eighteen months.\" What's the best response?",
+    choices: [
+      "\"Contracts like that are usually cheap to buy out. Cancel, and I'll cover the termination fee.\"",
+      "\"Understood. I'll call you in eighteen months.\" Then end the call.",
+      "\"A contract that long is a red flag about your current processor, so you should break it.\"",
+      "Acknowledge the commitment, offer a no-obligation comparison using their statement and contract so they can see what waiting versus switching means, and ask when it ends so you can stay useful.",
+    ],
+    answer: 3,
+    explanation:
+      "Acknowledge, then give them something of value: real numbers from their own documents, with no pressure to breach anything. Promising to cover a fee you haven't verified or attacking their processor damages trust, and a bare callback in eighteen months gives them no reason to remember you.",
+    lesson: { id: "executive-objections", title: "Executive Objections: Contracts, “It Works,” and “Send Info”" },
+  },
+  {
+    prompt:
+      "A CFO says: \"You all sound the same. Just give me your lowest rate.\" Which response fits the playbook's guidance on being a trusted advisor and not a commodity?",
+    choices: [
+      "Be straight that a rate without their statement is a guess. Offer a transparent analysis of what they pay now and why, and only claim differences you can back up.",
+      "Quote an aggressive rate to get into the conversation, and adjust it once they see the service.",
+      "Say you'll match or beat any quote in writing.",
+      "Explain that processors who lead with rates are commodity vendors and that yours is far superior.",
+    ],
+    answer: 0,
+    explanation:
+      "Competing on a rate you haven't earned the right to quote is a race to the bottom, and it anchors the whole deal on price. Offer transparency and an honest analysis, and promise the process, not a result. Matching or beating any quote is a promise you can't keep, and running down other vendors without proof is the opposite of trusted advisor.",
+    lesson: { id: "differentiate", title: "Don’t Be a Commodity" },
+  },
+];
+
 export const quizzes: Record<string, ModuleQuiz> = {
   "understanding-call-reluctance": {
     moduleNumber: 1,
@@ -1055,5 +1157,13 @@ export const quizzes: Record<string, ModuleQuiz> = {
     next: { href: "/practice/action-plan", label: "Continue to your 30-day action plan" },
     label: "Module 12 final exam",
     passMark: 8,
+  },
+  "executive-selling-nepq": {
+    moduleNumber: 13,
+    moduleSlug: "executive-selling-nepq",
+    moduleTitle: "Consultative Selling to Executives (NEPQ)",
+    questions: module13Quiz,
+    next: { href: "/courses", label: "Back to all modules" },
+    passMark: 6,
   },
 };

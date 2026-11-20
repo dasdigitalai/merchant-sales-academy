@@ -91,10 +91,13 @@ export function lastActive(data: LearnerData) {
 
 // Appointment-Setter Certification: every item in every module is complete
 // (the final scenario only completes on a passing call, the final exam only on
-// a pass). A module that isn't written or released yet blocks it. Certified on
+// a pass). A core module that isn't written or released yet blocks it; advanced
+// modules (track: "advanced") sit outside the certification, so adding or
+// releasing one never blocks or un-does anyone's certificate. Certified on
 // the date the last Module 12 item was completed.
 export function certification(data: LearnerData) {
   const remaining = modules
+    .filter((m) => m.track !== "advanced")
     .map((m) => ({ module: m, ...moduleCompletion(m, data) }))
     .filter((c) => c.module.lessons.length === 0 || c.module.status === "preview" || c.completed < c.total);
   const certified = remaining.length === 0;

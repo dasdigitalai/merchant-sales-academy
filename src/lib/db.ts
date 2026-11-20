@@ -9,7 +9,7 @@ import { db } from "./firebase";
 //   users/{uid}/progress/{module__item}  completed lessons, exercises and passed quizzes
 //   users/{uid}/moduleTime/{moduleSlug}  active seconds spent in each module
 //   users/{uid}/days/{YYYY-MM-DD}        active seconds per day (streaks, weekly activity)
-//   users/{uid}/journal/{id}             saved reflections, call plans, openers, pitch cards, discovery plans, objection playbooks, booking plans, follow-up plans, consistency plans, front-desk plans, call labs, final scenario calls, action plans and practice calls
+//   users/{uid}/journal/{id}             saved reflections, call plans, openers, pitch cards, discovery plans, objection playbooks, booking plans, follow-up plans, consistency plans, front-desk plans, call labs, final scenario calls, action plans, practice calls and executive conversation plans
 //   users/{uid}/quizResults/{id}         every knowledge-check attempt
 // Reps read and write only their own data; managers can read everyone's.
 
@@ -17,7 +17,7 @@ export type Role = "rep" | "manager";
 export type Profile = { uid: string; email: string; firstName: string; lastName: string; role: Role };
 export type Invite = { email: string; role: Role; invitedByName: string; createdAt: Date | null };
 export type ProgressItem = { moduleSlug: string; itemId: string; completedAt: Date | null };
-export type JournalType = "reflection" | "call-plan" | "opener" | "pitch-card" | "discovery-plan" | "objection-playbook" | "appointment-plan" | "follow-up-plan" | "consistency-plan" | "gatekeeper-plan" | "call-lab" | "final-scenario" | "action-plan" | "roleplay";
+export type JournalType = "reflection" | "call-plan" | "opener" | "pitch-card" | "discovery-plan" | "objection-playbook" | "appointment-plan" | "follow-up-plan" | "consistency-plan" | "gatekeeper-plan" | "call-lab" | "final-scenario" | "action-plan" | "roleplay" | "executive-conversation";
 export type JournalEntry = { id: string; type: JournalType; moduleSlug: string; title: string; data: Record<string, unknown>; createdAt: Date | null };
 export type QuizResult = { id: string; moduleSlug: string; score: number; total: number; passed: boolean; createdAt: Date | null };
 export type LearnerData = {
